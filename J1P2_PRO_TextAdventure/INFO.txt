@@ -1,0 +1,25 @@
+﻿Eisen:
+	- PEGI 12.
+	- Correcte naamgeving variabelen methods & classes.
+
+	O Er is een Potoo verwerkt in het spel.
+	O Beschrijvende comments bij je code.
+	O Externe bestanden gebruikt voor ASCII art.
+	O Cover art gemaakt
+	O Random event/willekeurige gebeurtenis in je spel.
+	O Geen goto!
+	O Geen onnodige herhaling van code!
+
+	Technische eisen:
+		O Collection (list & array)
+		O Conditional statements (switch statement & if, else if ,else)
+		O Loop (foreach, for, while & do while)
+		O Method met return type
+		O Method met parameters
+		O Classes (OOP)
+		
+		Optionele technische eisen:
+			O Collection(dictonary)
+			O Class constructors
+			O Correcte Access Modifiers
+			O ASCII art animatie.
