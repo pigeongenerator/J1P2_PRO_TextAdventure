@@ -1,12 +1,12 @@
-﻿namespace J1P2_PRO_TextAdventure
+﻿namespace J1P2_PRO_TextAdventure.CommandInput
 {
     /// <summary>
     /// this is used to check if a command is in a curtain string
     /// </summary>
     internal class Command
     {
-        public readonly string[] arguments;
-        private readonly string keyword;
+        public readonly string keyword;
+        private readonly string[] arguments;
 
 
         /// <summary>
