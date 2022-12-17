@@ -13,14 +13,4 @@
     <None Remove="CommandInput\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="ASCII\Art.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Environment\Tiles\" />
-  </ItemGroup>
-
 </Project>

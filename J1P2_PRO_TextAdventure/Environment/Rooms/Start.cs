@@ -7,7 +7,7 @@
             get { return false; }
         }
 
-        public override void Enter(Guid _playerEntityGuid)
+        public override void Enter()
         {
             Console.WriteLine("It seems like this is where you entered");
         }

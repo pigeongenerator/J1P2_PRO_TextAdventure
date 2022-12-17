@@ -1,22 +1,34 @@
-﻿using System.Diagnostics;
+﻿namespace J1P2_PRO_TextAdventure.Environment;
 
-namespace J1P2_PRO_TextAdventure.Environment
+internal abstract class LivingEntity
 {
-    internal class LivingEntity
+    private readonly float height;
+    private float weight;
+
+    public float BMI
     {
-        protected readonly string name;
-        protected Guid guid;
-        protected float maxHealth;
-        protected float health;
-
-        public LivingEntity(string _name, float _maxHealth, Guid _guid)
+        get
         {
-            Debug.WriteLine($"created a living entity with the name: {_name}");
-
-            maxHealth = _maxHealth;
-            health = _maxHealth;
-            guid = _guid;
-            name = _name;
+            double lengthSquared = Math.Pow(height, 2);
+            double bmi = Math.Round(weight / lengthSquared, 1);
+            return (float)bmi;
         }
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_maxHp">set's the max HP, value needs to be above 0</param>
+    /// <exception cref="ArgumentOutOfRangeException" />
+    public LivingEntity(float _weight, float _height)
+    {
+        weight = _weight;
+        height = _height;
+    }
+
+    protected void GainWeight(float _weight)
+    {
+        weight += _weight;
     }
 }

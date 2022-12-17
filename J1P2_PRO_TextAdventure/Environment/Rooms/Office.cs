@@ -29,9 +29,10 @@
             }
         }
 
-        public override void Enter(Guid _playerEntityGuid)
+        public override void Enter()
         {
             //starts boss battle
+            throw new NotImplementedException();
         }
 
         public override bool IsLocked

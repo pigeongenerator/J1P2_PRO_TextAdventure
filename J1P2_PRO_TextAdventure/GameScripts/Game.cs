@@ -1,27 +1,27 @@
-﻿namespace J1P2_PRO_TextAdventure.GameScripts
+﻿using J1P2_PRO_TextAdventure.Environment;
+using J1P2_PRO_TextAdventure.GameScripts.Loops;
+
+namespace J1P2_PRO_TextAdventure.GameScripts;
+
+internal class Game : IGameScript
 {
-    internal class Game
+    private Workshop workshop;
+
+
+    public Game()
     {
-        public void Start()
-        {
-            Welcome();
-        }
+        workshop = new Workshop();
+    }
 
-        private void Welcome()
-        {
-            Console.CursorVisible = false;
+    /// <summary>
+    /// starts the game
+    /// </summary>
+    public void Start()
+    {
+        Welcome welcome = new();
+        MainLoop main = new(workshop);
 
-            Dialogue dialogue = new(
-                "You woke up today.",
-                "Happily you ran downstairs; today it is Christmas",
-                "But there were no presents",
-                "this could only mean one thing: Santa become evil",
-                "naturally you booked a flight to the North pole and broke into his workshop",
-                "But he must have been prepared because the door of his office is locked!",
-                "that old man really didn't want you to get in because he installed X locks on the door",
-                "Now you need to look around for the keys hidden somewhere in his workshop!");
-
-            dialogue.Start(0, 0);
-        }
+        welcome.Start();
+        main.Start();
     }
 }
