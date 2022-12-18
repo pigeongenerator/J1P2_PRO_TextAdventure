@@ -7,6 +7,9 @@
             get { return false; }
         }
 
+        public Start() : base(false)
+        { }
+
         public override void Enter()
         {
             Console.WriteLine("It seems like this is where you entered");

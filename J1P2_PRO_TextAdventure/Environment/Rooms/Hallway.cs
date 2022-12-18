@@ -2,17 +2,15 @@
 {
     internal class Hallway : Room
     {
-        public Hallway()
-        {
-            isHidden = false;
-        }
+        public Hallway(Item _item) : base(false)
+        { }
 
         public override bool IsLocked
         {
             get { return false; }
         }
 
-        public override void Enter(Guid _playerEntityGuid)
+        public override void Enter()
         { }
     }
 }

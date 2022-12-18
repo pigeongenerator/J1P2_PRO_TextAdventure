@@ -6,7 +6,7 @@
         private int unlockedLocks;
         private bool locked;
 
-        public Office(int _locks, int _unlockedLocks = 0)
+        public Office(int _locks, int _unlockedLocks = 0) : base(true)
         {
             if (_unlockedLocks > _locks)
                 throw new ArgumentException("the amount of unlocked locks cannot be more than the amount of locks");

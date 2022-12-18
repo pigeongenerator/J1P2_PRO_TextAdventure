@@ -12,16 +12,15 @@ internal class MainLoop : Loop
         workshop = _workshop;
     }
 
-    protected override bool CheckLoop()
+    protected override bool Check()
     {
-        return true;
-        //throw new NotImplementedException();
+        throw new NotImplementedException();
     }
 
     protected override void DoLoop()
     {
-        //UpdateDisplay();
-        Console.ReadKey();
+        UpdateDisplay();
+        Console.ReadKey(true);
     }
 
     /// <summary>
@@ -29,17 +28,20 @@ internal class MainLoop : Loop
     /// </summary>
     private void UpdateDisplay()
     {
-        Console.Clear();
         char[,] workshopRender = workshop.GetRender();
+        string output = string.Empty;
 
 
         for (int x = 0; x < workshopRender.GetLength(0); x++)
         {
             for (int y = 0; y < workshopRender.GetLength(1); y++)
             {
-                Console.Write('|' + workshopRender[x,y].ToString());
+                output += '|' + workshopRender[x,y].ToString();
             }
-            Console.WriteLine('|');
+            output += "|\n";
         }
+
+        Console.Clear();
+        Console.WriteLine(output);
     }
 }

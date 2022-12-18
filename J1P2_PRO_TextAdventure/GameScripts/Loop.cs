@@ -11,14 +11,14 @@ internal abstract class Loop : IGameScript
         {
             DoLoop();
         }
-        while (CheckLoop() == true);
+        while (Check() == true);
     }
 
     /// <summary>
     /// checks a condition whether the loop should remain running or not
     /// </summary>
     /// <returns>true/false based on the condition</returns>
-    protected abstract bool CheckLoop();
+    protected abstract bool Check();
 
     /// <summary>
     /// contains all the code that should be looped

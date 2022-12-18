@@ -1,7 +1,11 @@
 ﻿namespace J1P2_PRO_TextAdventure.Environment;
 
+/// <summary>
+/// 
+/// </summary>
 internal abstract class Room
 {
+    protected List<Item> items;
     protected bool isGenerated = false;
     protected bool isHidden;
 
@@ -13,6 +17,16 @@ internal abstract class Room
         get;
     }
 
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_isHidden"></param>
+    public Room(bool _isHidden)
+    {
+        isHidden = _isHidden;
+        items = new List<Item>();
+    }
 
     /// <summary>
     /// Get's the tile's display character
@@ -30,14 +44,6 @@ internal abstract class Room
         }
     }
 
-    /// <summary>
-    /// generates the room
-    /// </summary>
-    protected void Generate()
-    {
-        if (isGenerated == true)
-            throw new Exception("The room is already generated");
-    }
 
     /// <summary>
     /// gets called when the player enters the room
