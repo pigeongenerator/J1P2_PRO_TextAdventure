@@ -3,14 +3,17 @@
     internal class DoorItem : Item
     {
         private readonly KeyItem key;
+        private readonly (int row, int column) leadsTo;
         private bool isLocked;
         private bool isOpen;
 
-        public bool IsLocked { get { return isLocked; } }
         public KeyItem Key { get { return key; } }
+        public (int row, int column) LeadsTo { get { return leadsTo; } }
+        public bool IsLocked { get { return isLocked; } }
 
-        public DoorItem(bool _isLocked) : base("door", "the door is too big to be eaten")
+        public DoorItem(bool _isLocked, (int row, int column) _leadsTo) : base("door", "the door is too big to be eaten")
         {
+            leadsTo = _leadsTo;
             isLocked = _isLocked;
             isOpen = false;
             key = new KeyItem(this);

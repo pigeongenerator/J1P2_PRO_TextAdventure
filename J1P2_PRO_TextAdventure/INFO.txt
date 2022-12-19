@@ -1,25 +1,31 @@
 ﻿Eisen:
-	- PEGI 12.
+	- PEGI 12.																	(violence in a fantacy enviroment and unrealstic violence toards human-like caracters)
 	- Correcte naamgeving variabelen methods & classes.
+	- Geen onnodige herhaling van code!
 
-	O Er is een Potoo verwerkt in het spel.
 	O Beschrijvende comments bij je code.
-	O Externe bestanden gebruikt voor ASCII art.
+	O Er is een Potoo verwerkt in het spel.										-> bird room?, random chance that santa is a potoo instead?
+	O Externe bestanden gebruikt voor ASCII art.								-> ascii art will be used for boss battle
+	O Random event/willekeurige gebeurtenis in je spel.							-> roomgeneration?, items within rooms?, key location?
 	O Cover art gemaakt
-	O Random event/willekeurige gebeurtenis in je spel.
-	O Geen goto!
-	O Geen onnodige herhaling van code!
+	V Geen goto!
 
 	Technische eisen:
-		O Collection (list & array)
-		O Conditional statements (switch statement & if, else if ,else)
-		O Loop (foreach, for, while & do while)
-		O Method met return type
-		O Method met parameters
-		O Classes (OOP)
+		V Collection (list & array)
+		V Loop (foreach, for, while & do while)
+		V Conditional statements (switch statement & if, else if ,else)
+		V Method met return type
+		V Method met parameters
+		V Classes (OOP)
 		
 		Optionele technische eisen:
-			O Collection(dictonary)
-			O Class constructors
-			O Correcte Access Modifiers
-			O ASCII art animatie.
+			O ASCII art animatie.												-> for boss battle?
+			V Collection(dictonary)
+			V Class constructors
+			V Correcte Access Modifiers
+
+
+TODO:
+ -make check for mainloop
+ -make it so you're able to have more than 1 door (more portal) in a room.
+ -add summaries

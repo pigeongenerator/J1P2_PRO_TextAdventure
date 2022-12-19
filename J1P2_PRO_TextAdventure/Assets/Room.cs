@@ -12,10 +12,10 @@ namespace J1P2_PRO_TextAdventure.Assets
         public string Name { get { return name; } }
 
 
-        public Room(string _name, bool _isLocked, params Item[] _items)
+        public Room(string _name, bool _isLocked, (int row, int column) _doorLeadsTo, params Item[] _items)
         {
             name = _name;
-            door = new DoorItem(_isLocked);
+            door = new DoorItem(_isLocked, _doorLeadsTo);
 
             List<Item> itemList = _items.ToList();
             itemList.Add(door);
@@ -36,6 +36,15 @@ namespace J1P2_PRO_TextAdventure.Assets
             }
 
             return output + '.';
+        }
+
+        /// <summary>
+        /// adds a door to the room
+        /// </summary>
+        /// <returns>this object</returns>
+        public Room AddDoor(bool _isLocked, (int row, int column) _doorLeadsTo)
+        {
+            throw new NotImplementedException();
         }
 
         private bool StartsWithVowel(string _value)
