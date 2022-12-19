@@ -1,4 +1,4 @@
-﻿namespace J1P2_PRO_TextAdventure.Environment;
+﻿namespace J1P2_PRO_TextAdventure.Environment.ItemTypes;
 
 internal class Item
 {

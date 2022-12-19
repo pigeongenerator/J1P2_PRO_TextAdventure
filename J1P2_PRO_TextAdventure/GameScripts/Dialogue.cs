@@ -1,4 +1,6 @@
-﻿namespace J1P2_PRO_TextAdventure;
+﻿using J1P2_PRO_TextAdventure.GameScripts;
+
+namespace J1P2_PRO_TextAdventure;
 
 /// <summary>
 /// 
@@ -6,6 +8,7 @@
 internal class Dialogue : IGameScript
 {
     private readonly string[] dialogueLines;
+    Game game;
     private int line;
     private int column;
 
@@ -31,10 +34,12 @@ internal class Dialogue : IGameScript
     /// <summary>
     /// is used to create dialogue prompts
     /// </summary>
+    /// <param name="_game">the current running game</param>
     /// <param name="_dialogueLines">set's the lines of the dialogue</param>
-    public Dialogue(params string[] _dialogueLines)
+    public Dialogue(Game _game, params string[] _dialogueLines)
     {
         dialogueLines = _dialogueLines;
+        game = _game;
     }
 
     /// <summary>
@@ -42,6 +47,8 @@ internal class Dialogue : IGameScript
     /// </summary>
     public void Start()
     {
+        Console.CursorVisible = false;
+
         WriteAt("[next]", line + 1, column + 1, true);
 
         foreach (string dialogueLine in dialogueLines)
@@ -49,6 +56,9 @@ internal class Dialogue : IGameScript
             WriteAt(dialogueLine, line, column);
             Console.ReadKey(true);
         }
+
+        Console.CursorVisible = true;
+        Console.Clear();
     }
 
     /// <summary>
@@ -59,7 +69,7 @@ internal class Dialogue : IGameScript
     /// <param name="_column">sets the column that should be written at</param>
     private void WriteAt(string _value, int _line, int _column, bool _flipColors = false)
     {
-        ClearLine(_line);
+        game.ClearLine(_line);
         Console.SetCursorPosition(_line, _column);
 
         if (_flipColors)
@@ -81,16 +91,5 @@ internal class Dialogue : IGameScript
 
         Console.ForegroundColor = originalBackground;
         Console.BackgroundColor = originalForeground;
-    }
-
-    /// <summary>
-    /// clears a line
-    /// </summary>
-    /// <param name="_line">sets the line to be cleared</param>
-    /// <param name="_spaces">sets amount of spaces to be cleared</param>
-    private void ClearLine(int _line)
-    {
-        Console.SetCursorPosition(_line, 0);
-        Console.Write(new string(' ', Console.BufferWidth));
     }
 }

@@ -1,15 +1,31 @@
-﻿using J1P2_PRO_TextAdventure.Environment.Rooms;
-
+﻿using J1P2_PRO_TextAdventure.Environment.ItemTypes;
+using J1P2_PRO_TextAdventure.Environment.LivingEntities;
+using J1P2_PRO_TextAdventure.Environment.Rooms;
+using J1P2_PRO_TextAdventure.GameScripts;
 
 namespace J1P2_PRO_TextAdventure.Environment;
 
 internal class Workshop
 {
     private readonly Room[,] workshop;
+    private readonly PlayerEntity player;
+    private readonly Game game;
 
-    public Workshop()
+    public Workshop(Game _game)
     {
+        game = _game;
         workshop = GenRooms(3, 5);
+        player = new PlayerEntity(2, 0, _game);
+    }
+
+    public PlayerEntity GetPlayer()
+    {
+        return player;
+    }
+
+    public (int maxRows, int maxColumns) GetMaxSize()
+    {
+        return (workshop.GetLength(0), workshop.GetLength(1));
     }
 
     public char[,] GetRender()
@@ -27,22 +43,27 @@ internal class Workshop
             }
         }
 
+        (int playerX, int playerY) = player.GetPosition();
+
+        render[playerX, playerY] = 'O';
+
         return render;
     }
 
     /// <summary>
     /// generates the rooms
     /// </summary>
-    /// <param name="_width">sets the width of the generated rooms</param>
-    /// <param name="_length">sets the length of the generated rooms</param>
+    /// <param name="_rows">sets the width of the generated rooms</param>
+    /// <param name="_columns">sets the length of the generated rooms</param>
     /// <returns></returns>
-    private Room[,] GenRooms(int _width, int _length)
+    private Room[,] GenRooms(int _rows, int _columns)
     {
-        Room[,] rooms = new Room[3, 1]
+        Room[,] rooms = new Room[_rows, _columns];
+        rooms = new Room[3, 1]
         {
-            { new Office(1) },
-            { new Hallway() },
-            { new Start() }
+            { new Office(game, 1) },
+            { new Hallway(game, new Item("key")) },
+            { new Start(game) }
         };
 
         return rooms;
@@ -51,15 +72,11 @@ internal class Workshop
     public void EnterRoom(int _posX, int _posY)
     {
         Room enteredRoom = workshop[_posX, _posY];
+        enteredRoom.Enter();
+    }
 
-        if (enteredRoom.IsLocked)
-        {
-            Console.WriteLine("hmm.. It seems like this room is locked.");
-        }
-        else
-        {
-            enteredRoom.Enter();
-        }
-
+    public bool IsRoomLocked(int _row, int _column)
+    {
+        return workshop[_row, _column].IsLocked;
     }
 }

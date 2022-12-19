@@ -1,13 +1,18 @@
-﻿namespace J1P2_PRO_TextAdventure.Environment;
+﻿using J1P2_PRO_TextAdventure.Environment.ItemTypes;
+using J1P2_PRO_TextAdventure.GameScripts;
+
+
+namespace J1P2_PRO_TextAdventure.Environment;
 
 /// <summary>
 /// 
 /// </summary>
 internal abstract class Room
 {
-    protected List<Item> items;
-    protected bool isGenerated = false;
+    protected readonly List<Item> items;
+    protected readonly Game game;
     protected bool isHidden;
+
 
     /// <summary>
     /// whether the room is locked or not
@@ -22,10 +27,11 @@ internal abstract class Room
     /// 
     /// </summary>
     /// <param name="_isHidden"></param>
-    public Room(bool _isHidden)
+    public Room(Game _game, bool _isHidden, params Item[] _items)
     {
         isHidden = _isHidden;
-        items = new List<Item>();
+        items = _items.ToList();
+        game = _game;
     }
 
     /// <summary>
@@ -42,6 +48,21 @@ internal abstract class Room
         {
             return ' ';
         }
+    }
+
+    /// <summary>
+    /// removes the given item from the room
+    /// </summary>
+    /// <returns>the item with the given name</returns>
+    /// <exception cref="InvalidOperationException" />
+    public void RemoveItem(Item _item)
+    {
+        int itemIndex = items.IndexOf(_item);
+
+        if (itemIndex == -1)
+            throw new InvalidOperationException($"The room does not contain this item {nameof(_item)}");
+
+        items.RemoveAt(itemIndex);
     }
 
 

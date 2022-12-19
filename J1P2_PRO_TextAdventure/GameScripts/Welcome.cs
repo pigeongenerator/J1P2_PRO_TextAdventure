@@ -2,11 +2,18 @@
 
 internal class Welcome : IGameScript
 {
+    private readonly Game game;
+
+
+    public Welcome(Game _game)
+    {
+        game = _game;
+    }
+
     public void Start()
     {
-        Console.CursorVisible = false;
-
         Dialogue dialogue = new(
+            game,
             "You woke up today.",
             "Happily you ran downstairs; today it is Christmas",
             "But there were no presents",

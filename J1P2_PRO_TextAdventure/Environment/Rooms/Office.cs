@@ -1,4 +1,6 @@
-﻿namespace J1P2_PRO_TextAdventure.Environment.Rooms
+﻿using J1P2_PRO_TextAdventure.GameScripts;
+
+namespace J1P2_PRO_TextAdventure.Environment.Rooms
 {
     internal class Office : Room
     {
@@ -6,7 +8,7 @@
         private int unlockedLocks;
         private bool locked;
 
-        public Office(int _locks, int _unlockedLocks = 0) : base(true)
+        public Office(Game _game, int _locks, int _unlockedLocks = 0) : base(_game, true)
         {
             if (_unlockedLocks > _locks)
                 throw new ArgumentException("the amount of unlocked locks cannot be more than the amount of locks");

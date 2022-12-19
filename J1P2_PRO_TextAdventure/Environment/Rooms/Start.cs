@@ -1,4 +1,6 @@
-﻿namespace J1P2_PRO_TextAdventure.Environment.Rooms
+﻿using J1P2_PRO_TextAdventure.GameScripts;
+
+namespace J1P2_PRO_TextAdventure.Environment.Rooms
 {
     internal class Start : Room
     {
@@ -7,12 +9,13 @@
             get { return false; }
         }
 
-        public Start() : base(false)
+
+        public Start(Game _game) : base(_game, false)
         { }
 
         public override void Enter()
         {
-            Console.WriteLine("It seems like this is where you entered");
+            game.WriteDialogue("It seems like this is where you entered");
         }
     }
 }

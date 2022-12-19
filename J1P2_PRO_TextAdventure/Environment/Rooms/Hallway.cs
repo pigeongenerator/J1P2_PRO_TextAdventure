@@ -1,8 +1,11 @@
-﻿namespace J1P2_PRO_TextAdventure.Environment.Rooms
+﻿using J1P2_PRO_TextAdventure.GameScripts;
+
+
+namespace J1P2_PRO_TextAdventure.Environment.Rooms
 {
     internal class Hallway : Room
     {
-        public Hallway(Item _item) : base(false)
+        public Hallway(Game _game) : base(_game, false)
         { }
 
         public override bool IsLocked
