@@ -3,7 +3,7 @@
     internal class Player
     {
         private readonly List<Item> inventory;
-        private int positionX, positionY;
+        private (int row, int column) position; //declares a tuple
 
         public List<Item> Inventory { get { return inventory; } }
 
@@ -11,33 +11,42 @@
         public Player(int _posX, int _posY)
         {
             inventory = new List<Item>();
-            positionX = _posX;
-            positionY = _posY;
+            position.row = _posX;
+            position.column = _posY;
         }
 
-        public (int posX, int posY) GetPlayerPos()
+        /// <summary>
+        /// gets the position that the player object thinks it is
+        /// </summary>
+        /// <returns>the position</returns>
+        public (int row, int column) GetPlayerPos()
         {
-            return (positionX, positionY);
+            return position;
         }
 
-        public void MoveTo(int _posX, int _posY, Workshop _workshop)
+        /// <summary>
+        /// moves the player
+        /// </summary>
+        /// <param name="_position">set's the position that the player should move to</param>
+        /// <param name="_workshop">set's the workshop to check</param>
+        public void MoveTo(int _row, int _column, Workshop _workshop)
         {
             (int width, int height) = _workshop.GetSize();
 
-            if (_posX < 0 || _posX >= height)
+            if (_row < 0 || _row >= height)
             {
-                _posX = positionX;
+                _row = position.row;
             }
 
-            if (_posY < 0 || _posY >= width)
+            if (_column < 0 || _column >= width)
             {
-                _posY = positionY;
+                _column = position.column;
             }
 
-            if (_workshop.GetRoom(_posX, _posY).Door.IsLocked == false)
+            if (_workshop.GetRoom(_row, _column).Door.IsLocked == false)
             {
-                positionX = _posX;
-                positionY = _posY;
+                position.row = _row;
+                position.column = _column;
             }
         }
     }
