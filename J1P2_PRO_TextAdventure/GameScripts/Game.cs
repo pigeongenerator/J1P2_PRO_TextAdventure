@@ -1,50 +1,33 @@
-﻿using J1P2_PRO_TextAdventure.Environment;
-using J1P2_PRO_TextAdventure.Environment.LivingEntities;
-using J1P2_PRO_TextAdventure.GameScripts.Loops;
+﻿using J1P2_PRO_TextAdventure.GameScripts.Loops;
+using J1P2_PRO_TextAdventure.Assets;
 
-namespace J1P2_PRO_TextAdventure.GameScripts;
-
-internal class Game : IGameScript
+namespace J1P2_PRO_TextAdventure.GameScripts
 {
-    private readonly PlayerEntity player;
-    private readonly Workshop workshop;
-
-
-    public Game()
+    internal class Game : IGameScript
     {
-        workshop = new Workshop(this);
-        player = workshop.GetPlayer();
-    }
+        private readonly Item[] gameItems;
+        private readonly MainLoop mainLoop;
+        private readonly Welcome welcome;
 
-    /// <summary>
-    /// starts the game
-    /// </summary>
-    public void Start()
-    {
-        Welcome welcome = new(this);
-        MainLoop main = new(workshop, player, this);
+        private readonly Item cookieItem = new Item("cookie", "you ate the delicious cookie and gained weight").Eatable();
+        private readonly Item broomItem = new Item("broom", "after a lot of effort and gagging you were able to push the broom down your throat.", "you don't know how to do this", "you started sweeping the floor, now it is less dirty").Eatable();
 
-        welcome.Start();
-        main.Start();
-    }
+        public Game()
+        {
+            mainLoop = new MainLoop();
+            welcome = new Welcome();
 
-    public void WriteDialogue(string _value)
-    {
-        (int rows, int columns) = workshop.GetMaxSize();
-        ClearLine(rows - 1);
+            gameItems = new Item[]
+            {
+                cookieItem,
+                broomItem
+            };
+        }
 
-        Console.SetCursorPosition(columns * 3 + 1, rows - 1);
-
-        Console.Write(_value);
-    }
-
-    /// <summary>
-    /// clears a line
-    /// </summary>
-    /// <param name="_line">sets the line to be cleared</param>
-    public void ClearLine(int _line)
-    {
-        Console.SetCursorPosition(0, _line);
-        Console.Write(new string(' ', Console.BufferWidth));
+        public void Start()
+        {
+            welcome.Start();
+            mainLoop.Start();
+        }
     }
 }
