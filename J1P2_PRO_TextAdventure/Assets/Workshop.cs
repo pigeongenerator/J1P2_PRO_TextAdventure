@@ -56,19 +56,19 @@ namespace J1P2_PRO_TextAdventure.Assets
             Room[,] rooms = new Room[,]
             {
                 { //row 0
-                    new Room("hallway", false, (0, 0), gameItems.GetItem("cookie")),
+                    new Room("broom closet", false, (0, 1), gameItems.GetItem("broom"), gameItems.GetItem("cookie")),
                     office,
-                    new Room("broom closet", false, (0, 0), gameItems.GetItem("broom"), gameItems.GetItem("cookie"))
+                    new Room("", false, (0, 0))
                 },
                 { //row 1
-                    new Room("hallway", false, (2, 1)),
+                    new Room("hallway", false, (0, 0), gameItems.GetItem("cookie"), gameItems.GetItem("cookie")),
                     new Room("hallway", false, (1, 0), office.Door.Key),
-                    new Room("hallway", false, (0, 0))
+                    new Room("hallway", false, (1, 1))
                 },
                 { //row 2
-                    new Room("hallway", false, (0, 0)),
-                    new Room("entrance", false, (1, 1)),
-                    new Room("hallway", false, (0, 0))
+                    new Room("", false, (0,0)),
+                    new Room("entrance", false, (2, 2)),
+                    new Room("hallway", false, (1, 2))
                 }
             };
 

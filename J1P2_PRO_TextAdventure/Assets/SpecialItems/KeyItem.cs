@@ -4,7 +4,7 @@
     {
         private readonly DoorItem door;
 
-        public KeyItem(DoorItem _door) : base("key", "it would be a bad idea to eat this")
+        public KeyItem(DoorItem _door) : base("key", "You it would be a bad idea to eat this")
         {
             door = _door;
         }

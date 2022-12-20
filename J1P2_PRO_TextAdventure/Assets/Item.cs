@@ -20,7 +20,7 @@
         }
 
 
-        public Item(string _name, string _onEat = "you don't know how to do this", string _onOpen = "you don't know how to do this", string _onUse = "you don't know how to do this")
+        public Item(string _name, string _onEat = "you don't know how to do this.", string _onOpen = "you don't know how to do this.", string _onUse = "you don't know how to do this.")
         {
             name = _name;
             onEat = _onEat;

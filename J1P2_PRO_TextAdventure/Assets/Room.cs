@@ -22,18 +22,9 @@ namespace J1P2_PRO_TextAdventure.Assets
             items.Add(door);
         }
 
-        /// <summary>
-        /// adds a door to the room
-        /// </summary>
-        /// <returns>this object</returns>
-        public Room AddDoor(bool _isLocked, (int row, int column) _doorLeadsTo)
+        public bool HasItem(string _itemName, bool _ignoreCanTake = false)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool HasItem(string _itemName)
-        {
-            int index = GetItemIndex(_itemName);
+            int index = GetItemIndex(_itemName, _ignoreCanTake);
 
             if (index == -1)
                 return false;
@@ -41,9 +32,9 @@ namespace J1P2_PRO_TextAdventure.Assets
             return true;
         }
 
-        public Item GetItem(string _itemName)
+        public Item GetItem(string _itemName, bool _ignoreCanTake = false)
         {
-            int index = GetItemIndex(_itemName);
+            int index = GetItemIndex(_itemName, _ignoreCanTake);
 
             if (index == -1)
                 throw new Exception($"could not find this item, {_itemName}");
@@ -53,7 +44,7 @@ namespace J1P2_PRO_TextAdventure.Assets
 
         public void RemoveItem(string _itemName)
         {
-            int index = GetItemIndex(_itemName);
+            int index = GetItemIndex(_itemName, false);
 
             if (index == -1)
                 throw new Exception($"could not find this item, {_itemName}");
@@ -66,11 +57,11 @@ namespace J1P2_PRO_TextAdventure.Assets
         /// </summary>
         /// <param name="_itemName">sets the name of the item to search</param>
         /// <returns>the index, -1 if no item was found</returns>
-        private int GetItemIndex(string _itemName)
+        private int GetItemIndex(string _itemName, bool _ignoreCanTake)
         {
             for (int i = 0; i < items.Count; i++)
             {
-                if (items[i].Name == _itemName && items[i].CanTake)
+                if (items[i].Name == _itemName && (_ignoreCanTake || items[i].CanTake))
                     return i;
             }
             

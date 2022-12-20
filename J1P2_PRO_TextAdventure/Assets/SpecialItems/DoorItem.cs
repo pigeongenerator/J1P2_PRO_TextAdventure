@@ -12,7 +12,7 @@
         public bool IsLocked { get { return isLocked; } }
         public bool IsOpen { get { return isOpen; } }
 
-        public DoorItem(bool _isLocked, (int row, int column) _leadsTo) : base("door", "the door is too big to be eaten")
+        public DoorItem(bool _isLocked, (int row, int column) _leadsTo) : base("door", "the door is too big to be eaten.")
         {
             key = new KeyItem(this);
             leadsTo = _leadsTo;
@@ -27,10 +27,14 @@
             {
                 return "It seems like this door is locked.";
             }
-            else
+            else if (isOpen == false)
             {
                 isOpen = true;
                 return "You opened the door.";
+            }
+            else
+            {
+                return "This door is already open!";
             }
         }
 

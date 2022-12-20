@@ -30,3 +30,4 @@ TODO:
  -fix it so you're able to have more than 1 door (more portal) in a room.
  -add summaries
  -add command system to replace the quick and dirty system
+  -make the mainloop's their methods better, perhaps extract some?

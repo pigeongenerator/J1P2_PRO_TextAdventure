@@ -11,5 +11,9 @@
         {
             throw new NotImplementedException();
         }
+
+        protected override void OnStart()
+        {
+        }
     }
 }
