@@ -2,14 +2,8 @@
 {
     internal class Office : Room
     {
-        public Office() : base("office", true)
+        public Office() : base("office", true, (0, 0))
         {
-        }
-
-        public override string OnEnter()
-        {
-            //start boss battle
-            throw new NotImplementedException();
         }
     }
 }

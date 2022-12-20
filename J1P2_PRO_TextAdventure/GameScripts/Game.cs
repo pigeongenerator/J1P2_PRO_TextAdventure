@@ -22,13 +22,13 @@ namespace J1P2_PRO_TextAdventure.GameScripts
             workshop = new Workshop(gameItems);
             player = workshop.Player;
 
-            mainLoop = new MainLoop();
+            mainLoop = new MainLoop(workshop, player);
             welcome = new Welcome();
         }
 
         public void Start()
         {
-            welcome.Start();
+            //welcome.Start();
             mainLoop.Start();
         }
     }

@@ -10,13 +10,15 @@
         public KeyItem Key { get { return key; } }
         public (int row, int column) LeadsTo { get { return leadsTo; } }
         public bool IsLocked { get { return isLocked; } }
+        public bool IsOpen { get { return isOpen; } }
 
         public DoorItem(bool _isLocked, (int row, int column) _leadsTo) : base("door", "the door is too big to be eaten")
         {
+            key = new KeyItem(this);
             leadsTo = _leadsTo;
             isLocked = _isLocked;
             isOpen = false;
-            key = new KeyItem(this);
+            CanTake = false;
         }
 
         public override string OnOpen()
@@ -38,13 +40,14 @@
 
             if (key == _key)
             {
+                isLocked = false;
                 output = "You opened the door with the key.";
             }
             else
             {
                 output = "This is the wrong key!";
             }
-
+            
             return output;
         }
     }

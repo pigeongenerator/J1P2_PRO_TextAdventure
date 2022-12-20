@@ -5,7 +5,8 @@
         private readonly List<Item> inventory;
         private (int row, int column) position; //declares a tuple
 
-        public List<Item> Inventory { get { return inventory; } }
+        public Item[] Inventory { get { return inventory.ToArray(); } }
+        public (int row, int column) Position { get { return position; } }
 
 
         public Player(int _posX, int _posY)
@@ -13,15 +14,6 @@
             inventory = new List<Item>();
             position.row = _posX;
             position.column = _posY;
-        }
-
-        /// <summary>
-        /// gets the position that the player object thinks it is
-        /// </summary>
-        /// <returns>the position</returns>
-        public (int row, int column) GetPlayerPos()
-        {
-            return position;
         }
 
         /// <summary>
@@ -48,6 +40,11 @@
                 position.row = _row;
                 position.column = _column;
             }
+        }
+
+        public void AddToInventory(Item _item)
+        {
+            inventory.Add(_item);
         }
     }
 }

@@ -6,14 +6,18 @@
         private readonly string onEat;
         private readonly string onOpen;
         private readonly string onUse;
+        private bool canTake;
         private bool isEatable;
         private bool isUsable;
-        private bool isUsableOnItem;
 
         public string Name { get { return name; } }
         public bool IsEatable { get { return isEatable; } }
         public bool IsUsable { get { return isUsable; } }
-        public bool IsUsableOnItem { get { return isUsableOnItem; } }
+        public bool CanTake
+        {
+            get { return canTake; }
+            protected set { canTake = value; }
+        }
 
 
         public Item(string _name, string _onEat = "you don't know how to do this", string _onOpen = "you don't know how to do this", string _onUse = "you don't know how to do this")
@@ -24,7 +28,7 @@
             onUse = _onUse;
             isEatable = false;
             isUsable = false;
-            isUsableOnItem = false;
+            canTake = true;
         }
 
         public Item Eatable()

@@ -5,8 +5,8 @@ namespace J1P2_PRO_TextAdventure.Assets
 {
     internal class Workshop
     {
-        private readonly Room[,] rooms;
         private readonly GameItems gameItems;
+        private readonly Room[,] rooms;
         private readonly Player player;
 
         public Player Player { get { return player; } }
@@ -14,9 +14,9 @@ namespace J1P2_PRO_TextAdventure.Assets
 
         public Workshop(GameItems _gameItems)
         {
-            rooms = GenerateRooms();
             gameItems = _gameItems;
-            player = new(1, 2);
+            rooms = GenerateRooms();
+            player = new(2, 1);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace J1P2_PRO_TextAdventure.Assets
         {
             Office office = new();
 
-            return new Room[,]
+            Room[,] rooms = new Room[,]
             {
                 { //row 0
                     new Room("hallway", false, (0, 0), gameItems.GetItem("cookie")),
@@ -67,10 +67,12 @@ namespace J1P2_PRO_TextAdventure.Assets
                 },
                 { //row 2
                     new Room("hallway", false, (0, 0)),
-                    new Room("start", false, (1, 1)),
+                    new Room("entrance", false, (1, 1)),
                     new Room("hallway", false, (0, 0))
                 }
             };
+
+            return rooms;
         }
     }
 }
