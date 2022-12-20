@@ -1,4 +1,5 @@
-﻿using J1P2_PRO_TextAdventure.Assets.SpecialRooms;
+﻿using J1P2_PRO_TextAdventure.Assets.SpecialItems;
+using J1P2_PRO_TextAdventure.Assets.SpecialRooms;
 using J1P2_PRO_TextAdventure.GameScripts;
 
 namespace J1P2_PRO_TextAdventure.Assets
@@ -51,18 +52,18 @@ namespace J1P2_PRO_TextAdventure.Assets
         /// <returns>the rooms in a 2D array</returns>
         private Room[,] GenerateRooms()
         {
-            Office office = new();
+            KeyItem key = new(0, 1, this);
 
             Room[,] rooms = new Room[,]
             {
                 { //row 0
-                    new Room("broom closet", false, (0, 1), gameItems.GetItem("broom"), gameItems.GetItem("cookie")),
-                    office,
+                    new Room("broom closet", true, (0, 1), gameItems.GetItem("broom"), gameItems.GetItem("cookie")),
+                    new Office(),
                     new Room("", false, (0, 0))
                 },
                 { //row 1
                     new Room("hallway", false, (0, 0), gameItems.GetItem("cookie"), gameItems.GetItem("cookie")),
-                    new Room("hallway", false, (1, 0), office.Door.Key),
+                    new Room("hallway", false, (1, 0), key),
                     new Room("hallway", false, (1, 1))
                 },
                 { //row 2

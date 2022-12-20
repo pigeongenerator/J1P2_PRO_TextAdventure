@@ -1,4 +1,6 @@
-﻿namespace J1P2_PRO_TextAdventure.Assets
+﻿using System.Diagnostics;
+
+namespace J1P2_PRO_TextAdventure.Assets
 {
     internal class Player
     {
@@ -25,21 +27,20 @@
         {
             (int width, int height) = _workshop.GetSize();
 
-            if (_row < 0 || _row >= height)
+            if ( _row < 0 || _row >= height )
             {
                 _row = position.row;
             }
 
-            if (_column < 0 || _column >= width)
+            if ( _column < 0 || _column >= width )
             {
                 _column = position.column;
             }
 
-            if (_workshop.GetRoom(_row, _column).Door.IsLocked == false)
-            {
-                position.row = _row;
-                position.column = _column;
-            }
+            position.row = _row;
+            position.column = _column;
+
+            Debug.WriteLine($"Player was moved! new position: {position}");
         }
 
         /// <summary>
@@ -60,7 +61,7 @@
         {
             int index = GetItemIndex(_itemName);
 
-            if (index == -1)
+            if ( index == -1 )
                 throw new Exception($"could not find this item {_itemName}");
 
             return inventoryItems[index];
@@ -81,17 +82,17 @@
         /// <returns>true if an item was found, false if it was not</returns>
         public bool HasItem(string _itemName)
         {
-            if (GetItemIndex(_itemName) == -1)
-            { return false;}
+            if ( GetItemIndex(_itemName) == -1 )
+            { return false; }
 
             return true;
         }
 
         private int GetItemIndex(string _itemName)
         {
-            for (int index = 0; index < inventoryItems.Count; index++)
+            for ( int index = 0; index < inventoryItems.Count; index++ )
             {
-                if (inventoryItems[index].Name == _itemName)
+                if ( inventoryItems[index].Name == _itemName )
                 {
                     return index;
                 }

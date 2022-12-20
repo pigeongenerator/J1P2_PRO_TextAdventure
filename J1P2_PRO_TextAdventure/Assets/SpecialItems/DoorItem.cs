@@ -12,9 +12,8 @@
         public bool IsLocked { get { return isLocked; } }
         public bool IsOpen { get { return isOpen; } }
 
-        public DoorItem(bool _isLocked, (int row, int column) _leadsTo) : base("door", "the door is too big to be eaten.")
+        public DoorItem(bool _isLocked, (int row, int column) _leadsTo) : base("door", "you were unable to remove the door from it's hinges.")
         {
-            key = new KeyItem(this);
             leadsTo = _leadsTo;
             isLocked = _isLocked;
             isOpen = false;
@@ -23,11 +22,11 @@
 
         public override string OnOpen()
         {
-            if (isLocked == true)
+            if ( isLocked == true )
             {
                 return "It seems like this door is locked.";
             }
-            else if (isOpen == false)
+            else if ( isOpen == false )
             {
                 isOpen = true;
                 return "You opened the door.";
@@ -38,20 +37,13 @@
             }
         }
 
-        public string Unlock(KeyItem _key)
+        public string Unlock()
         {
             string output;
 
-            if (key == _key)
-            {
-                isLocked = false;
-                output = "You opened the door with the key.";
-            }
-            else
-            {
-                output = "This is the wrong key!";
-            }
-            
+            isLocked = false;
+            output = "You opened the door with the key.";
+
             return output;
         }
     }

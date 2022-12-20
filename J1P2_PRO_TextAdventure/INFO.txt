@@ -31,3 +31,15 @@ TODO:
  -add summaries
  -add command system to replace the quick and dirty system
   -make the mainloop's their methods better, perhaps extract some?
+
+
+
+HOW TO PLAY:
+	use the following "commands":
+		-open
+		-go
+		-eat
+		-use
+		-inventory
+
+	to get to the last room.

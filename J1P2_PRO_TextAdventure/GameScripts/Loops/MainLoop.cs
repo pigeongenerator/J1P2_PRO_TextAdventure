@@ -241,6 +241,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
 
             return article;
 
+
             bool StartsWithVowel(string _value)
             {
                 switch ( _value[0] )
