@@ -52,7 +52,7 @@ namespace J1P2_PRO_TextAdventure.Assets
         /// <returns>the rooms in a 2D array</returns>
         private Room[,] GenerateRooms()
         {
-            KeyItem key = new(0, 1, this);
+            KeyItem key = new(0, 0, this);
 
             Room[,] rooms = new Room[,]
             {

@@ -7,7 +7,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts
         private readonly Dictionary<string, Item> items;
 
         private readonly Item cookieItem = new Item("cookie", "you ate the delicious cookie and gained weight").Eatable();
-        private readonly Item broomItem = new Item("broom", "after a lot of effort and gagging you were able to push the broom down your throat.", _onUse: "you started sweeping the floor, now it is less dirty").Eatable();
+        private readonly Item broomItem = new Item("broom", "after a lot of effort and gagging you were able to push the broom down your throat.", _onUse: "you started sweeping the floor, now it is less dirty").Eatable().Usable();
 
 
         public GameItems()

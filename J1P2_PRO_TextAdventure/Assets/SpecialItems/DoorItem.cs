@@ -2,12 +2,10 @@
 {
     internal class DoorItem : Item
     {
-        private readonly KeyItem key;
         private readonly (int row, int column) leadsTo;
         private bool isLocked;
         private bool isOpen;
 
-        public KeyItem Key { get { return key; } }
         public (int row, int column) LeadsTo { get { return leadsTo; } }
         public bool IsLocked { get { return isLocked; } }
         public bool IsOpen { get { return isOpen; } }

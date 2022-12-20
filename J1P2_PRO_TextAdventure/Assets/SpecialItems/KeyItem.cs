@@ -12,12 +12,15 @@ namespace J1P2_PRO_TextAdventure.Assets.SpecialItems
             doorPosition.row = _row;
             doorPosition.column = _column;
             workshop = _workshop;
+            Usable();
         }
 
         public override string OnUse()
         {
             DoorItem door = workshop.GetRoom(doorPosition.row, doorPosition.column).Door;
 
+            if ( workshop.Player.Position  != doorPosition)
+            { return "You don't know where to use the key"; }
 
             Debug.WriteLine($"unlocked door {nameof(door)}, at position {doorPosition}");
 

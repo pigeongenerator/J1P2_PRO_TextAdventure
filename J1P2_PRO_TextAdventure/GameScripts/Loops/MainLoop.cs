@@ -31,7 +31,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             Console.WriteLine($"\nyou find yourself in {GetArticle(playerRoom.Name)} {playerRoom.Name}, you see{ListItems(playerRoom.Items)}");
             input = GetInput("what do you want to do?");
 
-            //TEMPORARY COMMAND SYSTEM PLEASE INPROVE
+            //TEMPORARY COMMAND SYSTEM, YOU REALLY NEED TO REPLACE THIS AS SOON AS POSSIBLE
             if ( input.StartsWith("open") )
             {
 
@@ -54,6 +54,18 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             else if ( input.StartsWith("eat") )
             {
                 EatItem(playerRoom);
+            }
+            else if ( input.StartsWith("use") )
+            {
+                input = GetInput("what do you want to use?");
+                if ( ItemUsable(input) )
+                {
+                    Console.WriteLine(player.GetItem(input).OnUse());
+                }
+                else
+                {
+                    Console.WriteLine($"you don't understand how to use: {input}\n");
+                }
             }
             else
             {
@@ -88,7 +100,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             }
             else
             {
-                Console.WriteLine($"You did not see this item: {itemName}\n");
+                Console.WriteLine($"You don't know how to eat this: {itemName}\n");
                 return;
             }
 
@@ -211,6 +223,25 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             {
                 DoorItem door = (DoorItem)_item;
                 return door.IsOpen;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// gets if the item is usable or not
+        /// </summary>
+        /// <param name="_itemName">set's the item name for the item to search</param>
+        /// <returns>true if the item is usable, false if it is not or if no matching items were found</returns>
+        private bool ItemUsable(string _itemName)
+        {
+            if ( player.HasItem(_itemName) )
+            {
+                Item useItem = player.GetItem(_itemName);
+                if ( useItem.IsUsable )
+                {
+                    return true;
+                }
             }
 
             return false;

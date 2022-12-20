@@ -2,7 +2,7 @@
 {
     internal class Office : Room
     {
-        public Office() : base("office", false, (0, 0))
+        public Office() : base("office", false, (2, 1))
         {
         }
     }
