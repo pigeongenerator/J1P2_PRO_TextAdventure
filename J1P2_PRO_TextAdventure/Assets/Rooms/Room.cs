@@ -1,25 +1,25 @@
-﻿using J1P2_PRO_TextAdventure.Assets.SpecialItems;
+﻿using J1P2_PRO_TextAdventure.Assets.Items;
+using J1P2_PRO_TextAdventure.Assets.Items.SpecialItems;
+using J1P2_PRO_TextAdventure.Assets.Rooms;
 
 namespace J1P2_PRO_TextAdventure.Assets
 {
     internal class Room
     {
-        private readonly string name;
-        private readonly DoorItem door;
-        private readonly List<Item> items;
+        private readonly string roomName;
+        private readonly DoorItem[] roomDoors;
+        private readonly List<Item> roomItems;
 
-        public DoorItem Door { get { return door; } }
-        public string Name { get { return name; } }
-        public Item[] Items { get { return items.ToArray(); } }
+        public string RoomName { get { return roomName; } }
+        public DoorItem[] RoomDoors { get { return roomDoors; } }
+        public Item[] RoomItems { get { return roomItems.ToArray(); } }
+        ;
 
-
-        public Room(string _name, bool _isLocked, (int row, int column) _doorLeadsTo, params Item[] _items)
+        public Room(string _roomName, RoomBuilder _roomBuilder)
         {
-            name = _name;
-            door = new DoorItem(_isLocked, _doorLeadsTo);
-
-            items = _items.ToList();
-            items.Add(door);
+            roomName = _roomName;
+            roomDoors = _roomBuilder.RoomDoors.ToArray();
+            roomItems = _roomBuilder.RoomItems;
         }
 
         public bool HasItem(string _itemName, bool _ignoreCanTake = false)
@@ -39,7 +39,7 @@ namespace J1P2_PRO_TextAdventure.Assets
             if (index == -1)
                 throw new Exception($"could not find this item, {_itemName}");
 
-            return items[index];
+            return roomItems[index];
         }
 
         public void RemoveItem(string _itemName)
@@ -49,7 +49,7 @@ namespace J1P2_PRO_TextAdventure.Assets
             if (index == -1)
                 throw new Exception($"could not find this item, {_itemName}");
 
-            items.RemoveAt(index);
+            roomItems.RemoveAt(index);
         }
 
         /// <summary>
@@ -59,9 +59,9 @@ namespace J1P2_PRO_TextAdventure.Assets
         /// <returns>the index, -1 if no item was found</returns>
         private int GetItemIndex(string _itemName, bool _ignoreCanTake)
         {
-            for (int i = 0; i < items.Count; i++)
+            for (int i = 0; i < roomItems.Count; i++)
             {
-                if (items[i].Name == _itemName && (_ignoreCanTake || items[i].CanTake))
+                if (roomItems[i].ItemName == _itemName && (_ignoreCanTake || roomItems[i].CanTake))
                     return i;
             }
             

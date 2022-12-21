@@ -1,5 +1,7 @@
 ﻿using J1P2_PRO_TextAdventure.Assets;
-using J1P2_PRO_TextAdventure.Assets.SpecialItems;
+using J1P2_PRO_TextAdventure.Assets.Items;
+using J1P2_PRO_TextAdventure.Assets.Items.SpecialItems;
+using J1P2_PRO_TextAdventure.Assets.Rooms;
 using System.Diagnostics;
 
 namespace J1P2_PRO_TextAdventure.GameScripts.Loops
@@ -19,7 +21,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
         protected override bool Check()
         {
             Debug.WriteLine($"passed {nameof(MainLoop)} {nameof(Check)}, returning true.");
-            Debug.WriteLine($"the current player position is: {player.Position}, room name: {workshop.GetRoom(player.Position.row, player.Position.column).Name}");
+            Debug.WriteLine($"the current player position is: {player.Position}, room name: {workshop.GetRoom(player.Position.row, player.Position.column).RoomName}");
             return true;
         }
 
@@ -28,18 +30,18 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             string input;
             Room playerRoom = GetPlayerRoom();
 
-            Console.WriteLine($"\nyou find yourself in {GetArticle(playerRoom.Name)} {playerRoom.Name}, you see{ListItems(playerRoom.Items)}");
+            Console.WriteLine($"\nyou find yourself in {GetArticle(playerRoom.RoomName)} {playerRoom.RoomName}, you see{ListItems(playerRoom.RoomItems)}");
             input = GetInput("what do you want to do?");
 
             //TEMPORARY COMMAND SYSTEM, YOU REALLY NEED TO REPLACE THIS AS SOON AS POSSIBLE
             if ( input.StartsWith("open") )
             {
 
-                OpenDoor(playerRoom.Door);
+                OpenDoor(playerRoom.RoomDoor);
             }
             else if ( input.StartsWith("go") )
             {
-                GoThroughDoor(playerRoom.Door);
+                GoThroughDoor(playerRoom.RoomDoor);
             }
             else if ( input.StartsWith("take") )
             {
@@ -161,7 +163,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
 
             foreach ( Item item in _itemList )
             {
-                string itemName = item.Name;
+                string itemName = item.ItemName;
 
                 if ( IsOpenDoor(item) )
                 {
@@ -186,7 +188,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
         /// <param name="_door">set's the door that the player needs to go through</param>
         private void GoThroughDoor(DoorItem _door)
         {
-            (int row, int column) = _door.LeadsTo;
+            (int row, int column) = _door.DoorLeadsTo;
 
             if ( _door.IsOpen == false )
             {
@@ -209,7 +211,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
         /// <param name="_door">set's the door to be opened</param>
         private void OpenDoor(DoorItem _door)
         {
-            Console.WriteLine(_door.OnOpen() + '\n');
+            Console.WriteLine(_door.OnUse() + '\n');
         }
 
         /// <summary>

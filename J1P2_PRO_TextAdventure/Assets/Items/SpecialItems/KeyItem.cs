@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace J1P2_PRO_TextAdventure.Assets.SpecialItems
+namespace J1P2_PRO_TextAdventure.Assets.Items.SpecialItems
 {
     internal class KeyItem : Item
     {
@@ -17,9 +17,9 @@ namespace J1P2_PRO_TextAdventure.Assets.SpecialItems
 
         public override string OnUse()
         {
-            DoorItem door = workshop.GetRoom(doorPosition.row, doorPosition.column).Door;
+            DoorItem door = workshop.GetRoom(doorPosition.row, doorPosition.column).RoomDoor;
 
-            if ( workshop.Player.Position  != doorPosition)
+            if (workshop.Player.Position != doorPosition)
             { return "You don't know where to use the key"; }
 
             Debug.WriteLine($"unlocked door {nameof(door)}, at position {doorPosition}");

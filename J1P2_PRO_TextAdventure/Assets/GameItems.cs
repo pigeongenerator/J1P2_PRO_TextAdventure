@@ -1,4 +1,4 @@
-﻿using J1P2_PRO_TextAdventure.Assets;
+﻿using J1P2_PRO_TextAdventure.Assets.Items;
 
 namespace J1P2_PRO_TextAdventure.GameScripts
 {
@@ -6,16 +6,22 @@ namespace J1P2_PRO_TextAdventure.GameScripts
     {
         private readonly Dictionary<string, Item> items;
 
-        private readonly Item cookieItem = new Item("cookie", "you ate the delicious cookie and gained weight").Eatable();
-        private readonly Item broomItem = new Item("broom", "after a lot of effort and gagging you were able to push the broom down your throat.", _onUse: "you started sweeping the floor, now it is less dirty").Eatable().Usable();
+        private readonly Item cookieItem = new("cookie", new ItemBuilder()
+            .SetCanTake(true)
+            .SetEatable(true, "You ate the delicious cookie"));
+
+        private readonly Item broomItem = new("broom", new ItemBuilder()
+            .SetCanTake(true)
+            .SetEatable(true, "After a lot of gagging and choking, you managed to shove the broom down your throat.")
+            .SetUsable(true, false, "You started to sweep the floor. The floor is less dirty now."));
 
 
         public GameItems()
         {
             items = new Dictionary<string, Item>
             {
-                { cookieItem.Name, cookieItem },
-                { broomItem.Name, broomItem }
+                { cookieItem.ItemName, cookieItem },
+                { broomItem.ItemName, broomItem }
             }; ;
         }
 

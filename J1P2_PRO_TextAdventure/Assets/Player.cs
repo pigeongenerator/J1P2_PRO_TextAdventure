@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using J1P2_PRO_TextAdventure.Assets.Items;
 
 namespace J1P2_PRO_TextAdventure.Assets
 {
@@ -92,7 +93,7 @@ namespace J1P2_PRO_TextAdventure.Assets
         {
             for ( int index = 0; index < inventoryItems.Count; index++ )
             {
-                if ( inventoryItems[index].Name == _itemName )
+                if ( inventoryItems[index].ItemName == _itemName )
                 {
                     return index;
                 }

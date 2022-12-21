@@ -33,6 +33,7 @@ TODO:
 	-merge open and use "commands" (even better, when inplementing the command system, add the feature to have aliases)
 	-make actual check for mainloop
 	-add summaries
+	-find a better way to have return doors
 
 	BUGS:
 		-you're unable to have more than 1 door (more a portal) in a room.
@@ -47,7 +48,6 @@ FLAWS: (a.k.a. lazyness.. although, please fix as much as possible please)
 
 HOW TO PLAY:
 	use the following "commands":
-		-open
 		-go
 		-eat
 		-use

@@ -1,5 +1,6 @@
-﻿using J1P2_PRO_TextAdventure.Assets.SpecialItems;
-using J1P2_PRO_TextAdventure.Assets.SpecialRooms;
+﻿using J1P2_PRO_TextAdventure.Assets.Items.SpecialItems;
+using J1P2_PRO_TextAdventure.Assets.Rooms;
+using J1P2_PRO_TextAdventure.Assets.Rooms.SpecialRooms;
 using J1P2_PRO_TextAdventure.GameScripts;
 
 namespace J1P2_PRO_TextAdventure.Assets
@@ -38,8 +39,8 @@ namespace J1P2_PRO_TextAdventure.Assets
         /// <returns>the room at _row and _column</returns>
         public Room GetRoom(int _row, int _column)
         {
-            if (_row < 0 || _row >= rooms.GetLength(0) ||
-                _column < 0 || _column >= rooms.GetLength(1))
+            if ( _row < 0 || _row >= rooms.GetLength(0) ||
+                _column < 0 || _column >= rooms.GetLength(1) )
             {
                 throw new IndexOutOfRangeException();
             }
@@ -57,19 +58,52 @@ namespace J1P2_PRO_TextAdventure.Assets
             Room[,] rooms = new Room[,]
             {
                 { //row 0
-                    new Room("broom closet", true, (0, 1), gameItems.GetItem("broom"), gameItems.GetItem("cookie")),
-                    new Office(),
-                    new Room("", false, (0, 0))
+                    new Room("factory", new RoomBuilder()    // 0,0
+                        .AddDoor(new DoorItem(string.Empty, false, (1, 0)))
+                        .AddItem(gameItems.GetItem("cookie"))),
+
+                    new Office("office", new RoomBuilder()    // 0,1
+                        ),
+
+                    new Room("factory", new RoomBuilder()    // 0,2
+                        .AddDoor(new DoorItem(string.Empty, false, (1, 2)))
+                        .AddItem(key)),
+
                 },
                 { //row 1
-                    new Room("hallway", false, (0, 0), gameItems.GetItem("cookie"), gameItems.GetItem("cookie")),
-                    new Room("hallway", false, (1, 0), key),
-                    new Room("hallway", false, (1, 1))
+                    new Room("hallway", new RoomBuilder()    // 1,0
+                        .AddDoor(new DoorItem("left", false, (0, 0)))
+                        .AddDoor(new DoorItem("middle", false, (1, 1)))
+                        .AddDoor(new DoorItem("right", false, (2, 0)))),
+
+                    new Room("hallway", new RoomBuilder()    // 1,1
+                        .AddDoor(new DoorItem("left", false, (1, 0)))
+                        .AddDoor(new DoorItem("middle", false, (2, 0)))
+                        .AddDoor(new DoorItem("right", false, (1, 2)))),
+
+                    new Room("hallway", new RoomBuilder()    // 1,2
+                        .AddDoor(new DoorItem("left", false, (2, 2)))
+                        .AddDoor(new DoorItem("middle", false, (1, 1)))
+                        .AddDoor(new DoorItem("right", false, (0, 2)))
+                        .AddItem(gameItems.GetItem("cookie"))),
+
                 },
                 { //row 2
-                    new Room("", false, (0,0)),
-                    new Room("entrance", false, (2, 2)),
-                    new Room("hallway", false, (1, 2))
+                    new Room("broom closet", new RoomBuilder()           // 1,0
+                        .AddDoor(new DoorItem("left", false, (1,0)))
+                        .AddDoor(new DoorItem("right", false, (2, 1)))
+                        .AddItem(gameItems.GetItem("broom"))),
+
+                    new Room("entrance", new RoomBuilder()              // 1,0
+                        .AddDoor(new DoorItem("left", false, (2, 0)))
+                        .AddDoor(new DoorItem("middle", false, (1, 1)))
+                        .AddDoor(new DoorItem("right", false, (2, 2)))),
+
+                    new Room("sleeping quarters", new RoomBuilder()     // 1,0
+                        .AddDoor(new DoorItem("left", false, (2, 1)))
+                        .AddDoor(new DoorItem("right", false, (1, 2)))
+                        .AddItem(gameItems.GetItem("cookie"))
+                        .AddItem(gameItems.GetItem("cookie")))
                 }
             };
 
