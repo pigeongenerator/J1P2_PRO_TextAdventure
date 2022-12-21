@@ -7,19 +7,20 @@ namespace J1P2_PRO_TextAdventure.Assets
     internal class Room
     {
         private readonly string roomName;
-        private readonly DoorItem[] roomDoors;
+        private readonly DoorItem roomDoor;
         private readonly List<Item> roomItems;
 
         public string RoomName { get { return roomName; } }
-        public DoorItem[] RoomDoors { get { return roomDoors; } }
+        public DoorItem RoomDoor { get { return roomDoor; } }
         public Item[] RoomItems { get { return roomItems.ToArray(); } }
-        ;
+
 
         public Room(string _roomName, RoomBuilder _roomBuilder)
         {
             roomName = _roomName;
-            roomDoors = _roomBuilder.RoomDoors.ToArray();
+            roomDoor = _roomBuilder.RoomDoor;
             roomItems = _roomBuilder.RoomItems;
+            roomItems.Add(roomDoor);
         }
 
         public bool HasItem(string _itemName, bool _ignoreCanTake = false)

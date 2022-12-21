@@ -58,52 +58,19 @@ namespace J1P2_PRO_TextAdventure.Assets
             Room[,] rooms = new Room[,]
             {
                 { //row 0
-                    new Room("factory", new RoomBuilder()    // 0,0
-                        .AddDoor(new DoorItem(string.Empty, false, (1, 0)))
-                        .AddItem(gameItems.GetItem("cookie"))),
-
-                    new Office("office", new RoomBuilder()    // 0,1
-                        ),
-
-                    new Room("factory", new RoomBuilder()    // 0,2
-                        .AddDoor(new DoorItem(string.Empty, false, (1, 2)))
-                        .AddItem(key)),
-
+                    new Room("hallway", new RoomBuilder(new DoorItem("door", false, (0,0)))),
+                    new Office("hallway", new RoomBuilder(new DoorItem("door", false, (0,0)))),
+                    new Room("hallway", new RoomBuilder(new DoorItem("door", false, (0,1)))),
                 },
                 { //row 1
-                    new Room("hallway", new RoomBuilder()    // 1,0
-                        .AddDoor(new DoorItem("left", false, (0, 0)))
-                        .AddDoor(new DoorItem("middle", false, (1, 1)))
-                        .AddDoor(new DoorItem("right", false, (2, 0)))),
-
-                    new Room("hallway", new RoomBuilder()    // 1,1
-                        .AddDoor(new DoorItem("left", false, (1, 0)))
-                        .AddDoor(new DoorItem("middle", false, (2, 0)))
-                        .AddDoor(new DoorItem("right", false, (1, 2)))),
-
-                    new Room("hallway", new RoomBuilder()    // 1,2
-                        .AddDoor(new DoorItem("left", false, (2, 2)))
-                        .AddDoor(new DoorItem("middle", false, (1, 1)))
-                        .AddDoor(new DoorItem("right", false, (0, 2)))
-                        .AddItem(gameItems.GetItem("cookie"))),
-
+                    new Room("hallway", new RoomBuilder(new DoorItem("door", false, (1,0)))),
+                    new Room("hallway", new RoomBuilder(new DoorItem("door", false, (1,1)))),
+                    new Room("hallway", new RoomBuilder(new DoorItem("door", false, (0,2)))),
                 },
                 { //row 2
-                    new Room("broom closet", new RoomBuilder()           // 1,0
-                        .AddDoor(new DoorItem("left", false, (1,0)))
-                        .AddDoor(new DoorItem("right", false, (2, 1)))
-                        .AddItem(gameItems.GetItem("broom"))),
-
-                    new Room("entrance", new RoomBuilder()              // 1,0
-                        .AddDoor(new DoorItem("left", false, (2, 0)))
-                        .AddDoor(new DoorItem("middle", false, (1, 1)))
-                        .AddDoor(new DoorItem("right", false, (2, 2)))),
-
-                    new Room("sleeping quarters", new RoomBuilder()     // 1,0
-                        .AddDoor(new DoorItem("left", false, (2, 1)))
-                        .AddDoor(new DoorItem("right", false, (1, 2)))
-                        .AddItem(gameItems.GetItem("cookie"))
-                        .AddItem(gameItems.GetItem("cookie")))
+                    new Room("hallway", new RoomBuilder(new DoorItem("door", false, (1,0)))),
+                    new Room("hallway", new RoomBuilder(new DoorItem("door", false, (2,0)))),
+                    new Room("hallway", new RoomBuilder(new DoorItem("door", false, (2,1)))),
                 }
             };
 
