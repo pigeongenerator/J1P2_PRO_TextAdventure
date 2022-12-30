@@ -18,7 +18,7 @@ namespace J1P2_PRO_TextAdventure.Assets
         public Room(string _roomName, RoomBuilder _roomBuilder)
         {
             roomName = _roomName;
-            roomDoor = _roomBuilder.RoomDoor;
+            roomDoor = _roomBuilder.RoomDoors;
             roomItems = _roomBuilder.RoomItems;
             roomItems.Add(roomDoor);
         }
