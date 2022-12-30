@@ -28,8 +28,11 @@ namespace J1P2_PRO_TextAdventure.GameScripts
 
         public void Start()
         {
-            //welcome.Start();
+            welcome.Start();
             mainLoop.Start();
+
+            Console.WriteLine("you finished the game!");
+            Console.ReadKey(true);
         }
     }
 }

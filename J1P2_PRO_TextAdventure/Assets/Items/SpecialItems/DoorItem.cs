@@ -49,7 +49,7 @@
             string output;
 
             isLocked = false;
-            output = "You opened the door with the key.";
+            output = "You unlocked the door with the key.";
 
             return output;
         }

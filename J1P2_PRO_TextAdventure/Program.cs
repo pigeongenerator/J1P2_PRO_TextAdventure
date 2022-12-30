@@ -1,5 +1,5 @@
 ﻿using J1P2_PRO_TextAdventure.GameScripts;
-
+using J1P2_PRO_TextAdventure.GameScripts.Loops;
 
 namespace J1P2_PRO_TextAdventure; //file-scoped namespace
 

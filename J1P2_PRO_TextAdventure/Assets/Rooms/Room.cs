@@ -7,7 +7,7 @@ namespace J1P2_PRO_TextAdventure.Assets
     internal class Room
     {
         private readonly string roomName;
-        private readonly DoorItem roomDoor;
+        private readonly DoorItem[] roomDoors;
         private readonly List<Item> roomItems;
 
         public string RoomName { get { return roomName; } }
@@ -43,9 +43,9 @@ namespace J1P2_PRO_TextAdventure.Assets
             return roomItems[index];
         }
 
-        public void RemoveItem(string _itemName)
+        public void RemoveItem(string _itemName, bool _ignoreCanTake = false)
         {
-            int index = GetItemIndex(_itemName, false);
+            int index = GetItemIndex(_itemName, _ignoreCanTake);
 
             if (index == -1)
                 throw new Exception($"could not find this item, {_itemName}");

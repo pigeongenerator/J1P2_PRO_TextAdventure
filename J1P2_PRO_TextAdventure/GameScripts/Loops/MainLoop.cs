@@ -20,100 +20,80 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
 
         protected override bool Check()
         {
-            Debug.WriteLine($"passed {nameof(MainLoop)} {nameof(Check)}, returning true.");
             Debug.WriteLine($"the current player position is: {player.Position}, room name: {workshop.GetRoom(player.Position.row, player.Position.column).RoomName}");
-            return true;
+            return player.Position != (0, 0);
         }
 
         protected override void DoLoop()
         {
-            string input;
+            (string command, string argument) input;
             Room playerRoom = GetPlayerRoom();
 
             Console.WriteLine($"\nyou find yourself in {GetArticle(playerRoom.RoomName)} {playerRoom.RoomName}, you see{ListItems(playerRoom.RoomItems)}");
-            input = GetInput("what do you want to do?");
+            input = GetCommandInput("what do you want to do?");
 
-            //TEMPORARY COMMAND SYSTEM, YOU REALLY NEED TO REPLACE THIS AS SOON AS POSSIBLE
-            if ( input.StartsWith("open") )
+            //TEMPORARY COMMAND SYSTEM
+            switch ( input.command )
             {
+                case "go":
+                    GoThroughDoor(playerRoom.RoomDoor);
+                    break;
 
-                OpenDoor(playerRoom.RoomDoor);
-            }
-            else if ( input.StartsWith("go") )
-            {
-                GoThroughDoor(playerRoom.RoomDoor);
-            }
-            else if ( input.StartsWith("take") )
-            {
-                input = GetInput("what do you want to take?");
-                TakeItem(input, playerRoom);
-            }
-            else if ( input.StartsWith("inventory") )
-            {
-                string itemListed = ListItems(player.InventoryItems);
-                Console.WriteLine($"you have{itemListed}.\n");
-            }
-            else if ( input.StartsWith("eat") )
-            {
-                EatItem(playerRoom);
-            }
-            else if ( input.StartsWith("use") )
-            {
-                input = GetInput("what do you want to use?");
-                if ( ItemUsable(input) )
-                {
-                    Console.WriteLine(player.GetItem(input).OnUse());
-                }
-                else
-                {
-                    Console.WriteLine($"you don't understand how to use: {input}\n");
-                }
-            }
-            else
-            {
-                Console.WriteLine($"you don't know this thing: {input}\n");
+                case "open":
+                    Console.WriteLine(playerRoom.RoomDoor.OnUse() + '\n');
+                    break;
+
+                case "take":
+                    TakeItem(input.argument, playerRoom);
+                    break;
+
+                case "eat":
+                    EatItem(input.argument, playerRoom);
+                    break;
+
+                case "use":
+                    UseItem(input.argument, playerRoom);
+                    break;
+
+                case "inventory":
+                    Console.WriteLine($"you have: {ListItems(player.InventoryItems)}");
+                    break;
+
+                default:
+                    Console.WriteLine($"you don't know this thing: {input.command}\n");
+                    break;
             }
         }
 
-        /// <summary>
-        /// creates the prompt for eating items and eats the item if one was found
-        /// </summary>
-        /// <param name="_playerRoom">set's the room where the item needs to be searched</param>
-        private void EatItem(Room _playerRoom)
+        private void EatItem(string _itemName, Room _playerRoom)
         {
-            string itemName = GetInput("what do you want to eat?");
             Item eatItem;
 
-            if ( player.HasItem(itemName) )
+            if ( player.HasItem(_itemName) )
             {
-                eatItem = player.GetItem(itemName);
+                eatItem = player.GetItem(_itemName);
                 if ( eatItem.IsEatable )
                 {
                     player.RemoveItem(eatItem);
                 }
             }
-            else if ( _playerRoom.HasItem(itemName, true) )
+            else if ( _playerRoom.HasItem(_itemName, true) )
             {
-                eatItem = _playerRoom.GetItem(itemName, true);
+                eatItem = _playerRoom.GetItem(_itemName, true);
                 if ( eatItem.IsEatable )
                 {
-                    _playerRoom.RemoveItem(itemName);
+                    _playerRoom.RemoveItem(_itemName, true);
                 }
             }
             else
             {
-                Console.WriteLine($"You don't know how to eat this: {itemName}\n");
+                Console.WriteLine($"You don't know how to eat this: {_itemName}\n");
                 return;
             }
 
             Console.WriteLine($"{eatItem.OnEat()}\n");
         }
 
-        /// <summary>
-        /// takes an item from the room and puts it into the player's inventory
-        /// </summary>
-        /// <param name="_itemName">set's the name of the item to take</param>
-        /// <param name="_playerRoom">set's the room that should be looked in for the item</param>
         private void TakeItem(string _itemName, Room _playerRoom)
         {
             if ( _playerRoom.HasItem(_itemName) == false )
@@ -126,6 +106,50 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             player.AddToInventory(_playerRoom.GetItem(_itemName));
             _playerRoom.RemoveItem(_itemName);
         }
+
+        private void UseItem(string _itemName, Room _playerRoom)
+        {
+            Item? item = null;
+
+            if ( player.HasItem(_itemName) )
+            {
+                item = player.GetItem(_itemName);
+                player.RemoveItem(item);
+            }
+            else if ( _playerRoom.HasItem(_itemName) )
+            {
+                item = _playerRoom.GetItem(_itemName);
+            }
+
+            if ( item != null )
+            {
+                Console.WriteLine(item.OnUse());
+            }
+        }
+
+        /// <summary>
+        /// makes the player go through a door and moves them to the new location
+        /// </summary>
+        /// <param name="_door">set's the door that the player needs to go through</param>
+        private void GoThroughDoor(DoorItem _door)
+        {
+            (int row, int column) = _door.DoorLeadsTo;
+
+            if ( _door.IsOpen == false )
+            {
+                Console.WriteLine("you can't go through closed doors silly!\n");
+                return;
+            }
+            if ( _door.IsLocked )
+            {
+                Console.WriteLine("this door is locked!\n");
+                return;
+            }
+
+            Console.WriteLine("you walked through the door.\n");
+            player.MoveTo(row, column, workshop);
+        }
+
 
         /// <summary>
         /// get's the players input with a prompt, will retry endlessly until an input that is neither null or string.Empty
@@ -149,7 +173,25 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
 
             Console.WriteLine();
 
-            return input;
+            return input.ToLower(); ;
+        }
+
+        /// <summary>
+        /// get's the players input for commands
+        /// </summary>
+        /// <param name="_prompt">set's the prompt that asks the player for what to do</param>
+        /// <returns>the command and the argument. The argument is empty if none is given</returns>
+        private (string command, string argument) GetCommandInput(string _prompt)
+        {
+            string input;
+
+            input = GetInput(_prompt);
+
+            input += ' ';
+            string[] seperatedInput = input.Split(' ');
+
+
+            return (seperatedInput[0], seperatedInput[1]);
         }
 
         /// <summary>
@@ -178,40 +220,51 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             {
                 output += " nothing";
             }
+            else
+            {
+                output = output.TrimStart(',');
+            }
 
             return output;
         }
 
         /// <summary>
-        /// makes the player go through a door and moves them to the new location
+        /// get's the article for a string
         /// </summary>
-        /// <param name="_door">set's the door that the player needs to go through</param>
-        private void GoThroughDoor(DoorItem _door)
+        /// <param name="_getFor">set's the value that the article should be get from</param>
+        /// <returns>"an" if the string starts with a vowel, "a" if it doesn't</returns>
+        private string GetArticle(string _getFor)
         {
-            (int row, int column) = _door.DoorLeadsTo;
+            string article;
 
-            if ( _door.IsOpen == false )
+            article = StartsWithVowel(_getFor) ? "an" : "a"; //if the item name starts with a vowel, the article is "an". otherwise it is "a"
+
+            return article;
+
+
+            bool StartsWithVowel(string _value)
             {
-                Console.WriteLine("you can't go through closed doors silly!\n");
-                return;
-            }
-            if ( _door.IsLocked )
-            {
-                Console.WriteLine("this door is locked!\n");
-                return;
-            }
+                switch ( _value[0] )
+                {
+                    case 'a':
+                        return true;
 
-            Console.WriteLine("you walked through the door.\n");
-            player.MoveTo(row, column, workshop);
-        }
+                    case 'e':
+                        return true;
 
-        /// <summary>
-        /// opens the door, checks if the door is locked
-        /// </summary>
-        /// <param name="_door">set's the door to be opened</param>
-        private void OpenDoor(DoorItem _door)
-        {
-            Console.WriteLine(_door.OnUse() + '\n');
+                    case 'i':
+                        return true;
+
+                    case 'o':
+                        return true;
+
+                    case 'u':
+                        return true;
+
+                    default:
+                        return false;
+                }
+            }
         }
 
         /// <summary>
@@ -261,43 +314,5 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             return playerRoom;
         }
 
-        /// <summary>
-        /// get's the article for a string
-        /// </summary>
-        /// <param name="_getFor">set's the value that the article should be get from</param>
-        /// <returns>"an" if the string starts with a vowel, "a" if it doesn't</returns>
-        private string GetArticle(string _getFor)
-        {
-            string article;
-
-            article = StartsWithVowel(_getFor) ? "an" : "a"; //if the item name starts with a vowel, the article is "an". otherwise it is "a"
-
-            return article;
-
-
-            bool StartsWithVowel(string _value)
-            {
-                switch ( _value[0] )
-                {
-                    case 'a':
-                        return true;
-
-                    case 'e':
-                        return true;
-
-                    case 'i':
-                        return true;
-
-                    case 'o':
-                        return true;
-
-                    case 'u':
-                        return true;
-
-                    default:
-                        return false;
-                }
-            }
-        }
     }
 }

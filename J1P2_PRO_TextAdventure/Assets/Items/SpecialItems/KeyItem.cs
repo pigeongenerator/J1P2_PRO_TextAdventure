@@ -7,7 +7,10 @@ namespace J1P2_PRO_TextAdventure.Assets.Items.SpecialItems
         private readonly (int row, int column) doorPosition;
         private readonly Workshop workshop;
 
-        public KeyItem(int _row, int _column, Workshop _workshop) : base("key", new ItemBuilder().SetEatable(true, "You it would be a bad idea to eat this").SetCanTake(true))
+        public KeyItem(int _row, int _column, Workshop _workshop) : base("key", new ItemBuilder()
+            .SetEatable(true, "You it would be a bad idea to eat this")
+            .SetCanTake(true)
+            .SetUsable(true, true, "null"))
         {
             doorPosition.row = _row;
             doorPosition.column = _column;

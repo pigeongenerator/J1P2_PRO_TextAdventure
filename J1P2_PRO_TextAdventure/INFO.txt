@@ -27,7 +27,7 @@
 
 TODO:
 	-remove repetition, there is a lot.
-	-make the mainloop's their methods better, perhaps extract some?
+	-make the mainloop their methods better, perhaps extract some?
 	-add command system to replace the quick and dirty system
 	-make the items have an object in their constructor to construct the item with you not able to change the item during runtime
 	-merge open and use "commands" (even better, when inplementing the command system, add the feature to have aliases)
@@ -36,6 +36,7 @@ TODO:
 	-find a better way to have return doors
 
 	BUGS:
+		-consumed on use doesn't do anything (rooms, but probably players too)
 		-you're unable to have more than 1 door (more a portal) in a room.
 
 
@@ -44,13 +45,7 @@ FLAWS: (a.k.a. lazyness.. although, please fix as much as possible please)
 	-you can only have one door per room
 	-any key can be used to unlock any door
 
-
-
-HOW TO PLAY:
-	use the following "commands":
-		-go
-		-eat
-		-use
-		-inventory
-
-	to get to the last room.
+IDEAS:
+	-you need to gain more weight to eat heavier objects.
+	-to know your weight you first need to find.. one of those weighing things... yea.....
+	-some items dont have a constant weight. (if non-negative ints are allowed => (0, 20) - 10 )
