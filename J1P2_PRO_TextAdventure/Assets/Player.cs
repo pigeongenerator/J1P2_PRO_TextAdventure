@@ -6,17 +6,17 @@ namespace J1P2_PRO_TextAdventure.Assets
     internal class Player
     {
         private readonly List<Item> inventoryItems;
-        private (int row, int column) position; //declares a tuple
+        private int rowPosition, columnPosition;
 
         public Item[] InventoryItems { get { return inventoryItems.ToArray(); } }
-        public (int row, int column) Position { get { return position; } }
+        public (int row, int column) Position { get { return (rowPosition, columnPosition); } }
 
 
-        public Player(int _posX, int _posY)
+        public Player(int _rowPosition, int _columnPosition)
         {
             inventoryItems = new List<Item>();
-            position.row = _posX;
-            position.column = _posY;
+            rowPosition = _rowPosition;
+            columnPosition = _columnPosition;
         }
 
         /// <summary>
@@ -30,18 +30,18 @@ namespace J1P2_PRO_TextAdventure.Assets
 
             if ( _row < 0 || _row >= height )
             {
-                _row = position.row;
+                _row = rowPosition;
             }
 
             if ( _column < 0 || _column >= width )
             {
-                _column = position.column;
+                _column = columnPosition;
             }
 
-            position.row = _row;
-            position.column = _column;
+            rowPosition = _row;
+            columnPosition = _column;
 
-            Debug.WriteLine($"Player was moved! new position: {position}");
+            Debug.WriteLine($"Player was moved! new position: {(rowPosition, columnPosition)}");
         }
 
         /// <summary>

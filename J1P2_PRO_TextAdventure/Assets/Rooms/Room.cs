@@ -11,16 +11,15 @@ namespace J1P2_PRO_TextAdventure.Assets
         private readonly List<Item> roomItems;
 
         public string RoomName { get { return roomName; } }
-        public DoorItem RoomDoor { get { return roomDoor; } }
+        public DoorItem[] RoomDoors { get { return roomDoors; } }
         public Item[] RoomItems { get { return roomItems.ToArray(); } }
 
 
         public Room(string _roomName, RoomBuilder _roomBuilder)
         {
             roomName = _roomName;
-            roomDoor = _roomBuilder.RoomDoors;
+            roomDoors = _roomBuilder.RoomDoors.ToArray();
             roomItems = _roomBuilder.RoomItems;
-            roomItems.Add(roomDoor);
         }
 
         public bool HasItem(string _itemName, bool _ignoreCanTake = false)

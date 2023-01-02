@@ -9,6 +9,7 @@ namespace J1P2_PRO_TextAdventure.Assets.Rooms
     internal class RoomBuilder
     {
         private const int maxDoors = 3;
+        private readonly string[] doorNames;
         private List<DoorItem> roomDoors;
         private List<Item> roomItems;
 
@@ -19,8 +20,9 @@ namespace J1P2_PRO_TextAdventure.Assets.Rooms
         /// <summary>
         /// builds a room
         /// </summary>
-        public RoomBuilder()
+        public RoomBuilder(bool _generateItems)
         {
+            doorNames = new string[maxDoors] { "left", "middle", "right" };
             roomDoors = new List<DoorItem>();
             roomItems = new List<Item>();
         }
@@ -38,13 +40,18 @@ namespace J1P2_PRO_TextAdventure.Assets.Rooms
         /// <summary>
         /// adds a door to the room, cannot have more doors than <see cref="maxDoors"/>
         /// </summary>
-        /// <param name="_door">set's the door to be added</param>
+        /// <param name="_isLocked">set's whether the door is locked</param>
+        /// <param name="_leadsToColumn">set's to what column the door leads</param>
+        /// <param name="_leadsToRow">set's to what row the door leads</param>
         /// <exception cref="Exception"></exception>
-        public RoomBuilder AddDoor(DoorItem _door)
+        public RoomBuilder AddDoor(bool _isLocked, int _leadsToRow, int _leadsToColumn)
         {
             if ( roomDoors.Count >= maxDoors )
                 throw new Exception($"a room cannot have more than {maxDoors} doors");
-            roomDoors.Add(_door);
+
+            DoorItem door = new(doorNames[roomDoors.Count], _isLocked, _leadsToRow, _leadsToColumn);
+
+            roomDoors.Add(door);
             return this;
         }
     }

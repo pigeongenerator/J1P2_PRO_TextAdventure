@@ -19,14 +19,18 @@ namespace J1P2_PRO_TextAdventure.Assets.Items.SpecialItems
 
         public override string OnUse()
         {
-            DoorItem door = workshop.GetRoom(doorPosition.row, doorPosition.column).RoomDoor;
+            DoorItem[] roomDoors = workshop.GetRoom(doorPosition.row, doorPosition.column).RoomDoors;
 
-            if (workshop.Player.Position != doorPosition)
-            { return "You don't know where to use the key"; }
+            foreach ( DoorItem door in roomDoors )
+            {
+                if ( workshop.Player.Position != doorPosition )
+                {
+                    Debug.WriteLine($"unlocked door {nameof(door)}, at position {doorPosition}");
+                    return door.Unlock();
+                }
+            }
 
-            Debug.WriteLine($"unlocked door {nameof(door)}, at position {doorPosition}");
-
-            return door.Unlock();
+            return "You don't know where to use the key";
         }
     }
 }
