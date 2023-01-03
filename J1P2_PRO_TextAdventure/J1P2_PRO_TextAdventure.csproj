@@ -13,4 +13,13 @@
     <None Remove="CommandInput\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Assets\Animation\test0.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Animation\test1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

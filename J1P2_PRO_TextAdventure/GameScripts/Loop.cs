@@ -1,41 +1,47 @@
 ﻿using System.Diagnostics;
 
-namespace J1P2_PRO_TextAdventure.GameScripts;
-
-internal abstract class Loop : IGameScript
+namespace J1P2_PRO_TextAdventure.GameScripts
 {
-    /// <summary>
-    /// starts the loop
-    /// </summary>
-    public void Start()
+    internal abstract class Loop : IGameScript
     {
-        Debug.WriteLine($"started loop {GetType()}");
-        OnStart();
-
-        do
+        /// <summary>
+        /// starts the loop
+        /// </summary>
+        public void Start()
         {
-            Debug.WriteLine($"{GetType()} started new loop");
-            DoLoop();
+            Debug.WriteLine($"started loop {this}.");
+            OnStart();
+
+            do
+            {
+                DuringLoop();
+                Debug.WriteLine($"reached end of loop {this}.");
+            }
+            while ( CheckLoop() );
+
+            OnStop();
+            Debug.WriteLine($"quit loop {this}");
         }
-        while (Check() == true);
-    }
 
-    /// <summary>
-    /// checks a condition whether the loop should remain running or not
-    /// </summary>
-    /// <returns>true/false based on the condition</returns>
-    protected abstract bool Check();
+        /// <summary>
+        /// gets called once upon start
+        /// </summary>
+        protected abstract void OnStart();
 
-    /// <summary>
-    /// contains all the code that should be looped
-    /// </summary>
-    protected abstract void DoLoop();
+        /// <summary>
+        /// runs during the loop
+        /// </summary>
+        protected abstract void DuringLoop();
 
-    /// <summary>
-    /// the code that is ran before the loop starts
-    /// </summary>
-    protected virtual void OnStart()
-    {
-        Debug.WriteLine($"{nameof(OnStart)} has not been overwritten in Loop {GetType()}");
+        /// <summary>
+        /// checks a condition during the loop
+        /// </summary>
+        /// <returns>true/false based on a condition</returns>
+        protected abstract bool CheckLoop();
+
+        /// <summary>
+        /// get's called once when the loop ends
+        /// </summary>
+        protected abstract void OnStop();
     }
 }
