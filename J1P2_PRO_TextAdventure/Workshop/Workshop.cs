@@ -6,7 +6,17 @@ namespace J1P2_PRO_TextAdventure.Workshop
 {
     internal class Workshop
     {
+        public Workshop()
+        {
+            GameObjects gameObjects = new();
+        }
 
+        /// <summary>
+        /// generates the workshop.
+        /// </summary>
+        /// <param name="_rows">specifies the amount of rows the array should have</param>
+        /// <param name="_columns">specifies the amount of columns the array should have</param>
+        /// <returns>a 2D array with all the rooms and items.</returns>
         private Room[,] Generate(int _rows, int _columns)
         {
             Room[,] rooms = new Room[_rows, _columns];
@@ -17,7 +27,7 @@ namespace J1P2_PRO_TextAdventure.Workshop
                 {
                     if (rooms[row, column] == null)
                     {
-
+                        rooms[row, column] = GenerateRoom();
                     }
                 }
             }
@@ -27,6 +37,8 @@ namespace J1P2_PRO_TextAdventure.Workshop
 
         private Room GenerateRoom()
         {
+            Generator<string> roomGenerator = new();
+            Room room;
 
 
             return room;
@@ -34,7 +46,6 @@ namespace J1P2_PRO_TextAdventure.Workshop
 
         private Item GenerateItem()
         {
-            
         }
     }
 }

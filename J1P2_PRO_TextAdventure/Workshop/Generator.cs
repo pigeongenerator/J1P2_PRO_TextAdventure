@@ -4,12 +4,12 @@
     /// selects a random item from a pool of items
     /// </summary>
     /// <typeparam name="_type">sets the type of the items the selector will select out of</typeparam>
-    internal class Selector<_type>
+    internal class Generator<_type>
     {
         private readonly List<_type> pool;
 
 
-        public Selector()
+        public Generator()
         {
             pool = new List<_type>();
         }
@@ -27,7 +27,7 @@
         /// selects a random item from the pool of items
         /// </summary>
         /// <returns>the item with the type of this</returns>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception">+</exception>
         public _type SelectItem()
         {
             if ( pool.Count <= 0 )
