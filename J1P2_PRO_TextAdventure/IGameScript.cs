@@ -1,10 +1,21 @@
 ﻿namespace J1P2_PRO_TextAdventure
 {
-    internal interface IGameScript //defines an interface (a set of rules that a class inherited should follow)
+    /// <summary>
+    /// interface for game scripts, starts the script using Start().
+    /// </summary>
+    internal interface IGameScript
     {
         /// <summary>
-        /// runs the code that starts the script
+        /// starts the game script
         /// </summary>
-        public abstract void Start();
+        public void Start()
+        {
+            Script();
+        }
+
+        /// <summary>
+        /// is called upon running the script
+        /// </summary>
+        protected abstract void Script();
     }
 }

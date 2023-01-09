@@ -1,14 +1,10 @@
-﻿using J1P2_PRO_TextAdventure.GameScripts;
-
-namespace J1P2_PRO_TextAdventure // "location" of the script
+﻿namespace J1P2_PRO_TextAdventure
 {
-
-    internal class Program //defines a class
+    internal class Program
     {
-        public static void Main(string[] _args) //defines a static method
+        public static void Main(string[] _args)
         {
-            Game game = new(); //defines a new game object
-            game.Start(); //starts the game
+            Console.WriteLine("this is the fourth time! whoooooooo!");
         }
     }
 }
