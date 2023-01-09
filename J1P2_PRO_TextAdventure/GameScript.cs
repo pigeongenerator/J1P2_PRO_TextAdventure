@@ -3,7 +3,7 @@
     /// <summary>
     /// interface for game scripts, starts the script using Start().
     /// </summary>
-    internal interface IGameScript
+    internal abstract class GameScript
     {
         /// <summary>
         /// starts the game script

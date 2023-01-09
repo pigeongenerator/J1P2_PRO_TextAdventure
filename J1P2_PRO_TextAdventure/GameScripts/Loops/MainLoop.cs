@@ -1,18 +1,18 @@
 ﻿namespace J1P2_PRO_TextAdventure.GameScripts.Loops
 {
-    internal class MainLoop : ILoop
+    internal class MainLoop : Loop
     {
-        void ILoop.Loop()
+        protected override void OnStart()
         {
             throw new NotImplementedException();
         }
 
-        bool ILoop.LoopCondition()
+        protected override bool LoopCondition()
         {
             throw new NotImplementedException();
         }
 
-        void ILoop.OnStart()
+        protected override void DuringLoop()
         {
             throw new NotImplementedException();
         }

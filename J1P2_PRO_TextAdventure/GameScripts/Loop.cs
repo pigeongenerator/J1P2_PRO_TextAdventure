@@ -3,15 +3,15 @@
     /// <summary>
     /// 
     /// </summary>
-    internal interface ILoop : IGameScript
+    internal abstract class Loop : GameScript
     {
-        void IGameScript.Script()
+        protected override void Script()
         {
             OnStart();
 
             while (LoopCondition())
             {
-                Loop();
+                DuringLoop();
             }
         }
 
@@ -23,7 +23,7 @@
         /// <summary>
         /// is called during the loop
         /// </summary>
-        protected abstract void Loop();
+        protected abstract void DuringLoop();
 
         /// <summary>
         /// is called once at the beginning of each loop 

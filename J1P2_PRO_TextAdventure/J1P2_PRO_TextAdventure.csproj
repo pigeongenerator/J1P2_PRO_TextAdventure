@@ -16,4 +16,10 @@
     <None Remove="CommandInput\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="ASCII\title.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
