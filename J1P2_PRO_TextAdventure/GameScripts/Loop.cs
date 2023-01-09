@@ -21,14 +21,14 @@
         protected abstract void OnStart();
 
         /// <summary>
-        /// is called during the loop
-        /// </summary>
-        protected abstract void DuringLoop();
-
-        /// <summary>
         /// is called once at the beginning of each loop 
         /// </summary>
         /// <returns>true or false depending on the loop's condition</returns>
         protected abstract bool LoopCondition();
+
+        /// <summary>
+        /// is called during the loop
+        /// </summary>
+        protected abstract void DuringLoop();
     }
 }

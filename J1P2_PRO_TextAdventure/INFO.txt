@@ -5,9 +5,9 @@
 
 	O Beschrijvende comments bij je code.
 	O Er is een Potoo verwerkt in het spel.
-	O Externe bestanden gebruikt voor ASCII art.
 	O Random event/willekeurige gebeurtenis in je spel.
 	O Cover art gemaakt
+	V Externe bestanden gebruikt voor ASCII art.
 	V Geen goto!
 
 	Technische eisen:
