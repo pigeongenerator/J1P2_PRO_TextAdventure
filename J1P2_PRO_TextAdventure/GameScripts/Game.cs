@@ -38,7 +38,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts
 
             if ( random.Next(100) < 25 ) //returns true a curtain percentage of the time
             {
-                dialogueLines[3] = "Then a potoo flew by.";
+                dialogueLines[3] = "A potoo flew by, it was so majestic.";
             }
 
             dialogue = new Dialogue(dialogueLines);
