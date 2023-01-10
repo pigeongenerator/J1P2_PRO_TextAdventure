@@ -12,11 +12,11 @@
 
 	Technische eisen:
 		O Collection (list & array)
-		O Loop (foreach, for, while & do while)
-		O Conditional statements (switch statement & if, else if ,else)
-		O Method met return type
-		O Method met parameters
-		O Classes (OOP)
+		V Loop (foreach, for, while & do while)
+		V Conditional statements (switch statement & if, else if ,else)
+		V Method met return type
+		V Method met parameters
+		V Classes (OOP)
 		
 		Optionele technische eisen:
 			O ASCII art animatie.

@@ -8,11 +8,8 @@ namespace J1P2_PRO_TextAdventure.GameScripts
     {
         protected override void Script()
         {
-            
-
             MainLoop mainLoop = new();
             
-
             Welcome();
             mainLoop.Start();
         }
@@ -70,7 +67,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts
             Console.SetBufferSize(135, Console.WindowHeight);
             Console.SetWindowSize(135, Console.WindowHeight);
 
-            WriteFromFile("./ASCII/title.txt");
+            WriteFromFile("./Assets/ASCII/title.txt");
 
             dialogue.Start();
         }
