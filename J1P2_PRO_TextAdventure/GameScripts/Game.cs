@@ -1,6 +1,6 @@
-﻿using J1P2_PRO_TextAdventure.GameScripts.Loops;
+﻿using J1P2_PRO_TextAdventure.Assets.Environment;
+using J1P2_PRO_TextAdventure.GameScripts.Loops;
 using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
 
 namespace J1P2_PRO_TextAdventure.GameScripts
 {
@@ -8,7 +8,9 @@ namespace J1P2_PRO_TextAdventure.GameScripts
     {
         protected override void Script()
         {
-            MainLoop mainLoop = new();
+            World world = new World();
+
+            MainLoop mainLoop = new(world);
             
             Welcome();
             mainLoop.Start();

@@ -1,25 +1,25 @@
-﻿Eisen:
+﻿Minimale Eisen:
 	- PEGI 12.																	(violence in a fantacy enviroment and unrealstic violence toards human-like caracters)
 	- Correcte naamgeving variabelen methods & classes.
 	- Geen onnodige herhaling van code!
 
 	O Beschrijvende comments bij je code.
-	O Er is een Potoo verwerkt in het spel.
-	O Random event/willekeurige gebeurtenis in je spel.
 	O Cover art gemaakt
+	O Random event/willekeurige gebeurtenis in je spel.							-> location of FOOD
+	V Er is een Potoo verwerkt in het spel.
 	V Externe bestanden gebruikt voor ASCII art.
 	V Geen goto!
 
-	Technische eisen:
-		O Collection (list & array)
-		V Loop (foreach, for, while & do while)
-		V Conditional statements (switch statement & if, else if ,else)
-		V Method met return type
-		V Method met parameters
-		V Classes (OOP)
+Technische eisen:
+	O Collection (list & array)
+	O Loop (foreach, for, while & do while)
+	O Conditional statements (switch statement & if, else if, else)
+	V Method met return type
+	V Method met parameters
+	V Classes (OOP)
 		
-		Optionele technische eisen:
-			O ASCII art animatie.
-			O Collection(dictonary)
-			O Class constructors
-			O Correcte Access Modifiers
+	Optionele technische eisen:
+		O ASCII art animatie.
+		O Collection(dictonary)
+		V Correcte Access Modifiers
+		V Class constructors
