@@ -33,9 +33,9 @@
             int x;
             int y;
 
-            for ( int i = 0; i < newPos.Length; i++ )
+            for (int i = 0; i < newPos.Length; i++)
             {
-                if ( newPos[i] >= 0 && newPos[i] < _world.GetSize(i) )
+                if (newPos[i] >= 0 && newPos[i] < _world.GetSize(i))
                 {
                     newPos[i] = pos[i];
                 }
@@ -44,7 +44,7 @@
             x = newPos[0];
             y = newPos[1];
 
-            if ( _world.GetTile(x, y).CanEnter(this) )
+            if (_world.GetTile(x, y).CanEnter(this))
             {
                 pos[0] = x;
                 pos[1] = y;
