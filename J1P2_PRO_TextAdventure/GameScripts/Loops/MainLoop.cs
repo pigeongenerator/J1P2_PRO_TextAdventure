@@ -4,7 +4,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
 {
     internal class MainLoop : Loop
     {
-        private World world;
+        private readonly World world;
 
 
         public MainLoop(World _world)
@@ -12,45 +12,58 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             world = _world;
         }
 
-        protected override void OnStart()
-        {
-
-        }
-
         protected override bool LoopCondition()
         {
-            //throw new NotImplementedException();
+            (int posX, int posY) = world.Player.GetPosition();
+
+            if (world.GetTile(posX, posY).Type == TileType.mountain)
+            {
+                return false;
+            }
+
             return true;
         }
 
         protected override void DuringLoop()
         {
+            string input;
+            InputLoop inputLoop = new("What do you want to do?");
+
             Console.WriteLine();
-            string input = Prompt("What do you want to do?");
+            inputLoop.Start();
+
+            input = inputLoop.GetInput();
 
 #warning please find a better solution for input
             if (input.StartsWith("go"))
             {
-                if (input.EndsWith("north"))
+                if (TryMoveInput(input, "north", 0, 1)) { }
+                else if (TryMoveInput(input, "east", 1, 0)) { }
+                else if (TryMoveInput(input, "south", 0, -1)) { }
+                else if (TryMoveInput(input, "west", -1, 0)) { }
+                else
                 {
-                    world.Player.Move(0, 1, world);
+                    Console.WriteLine(" You don't know how to go there.");
                 }
-                else if (input.EndsWith("east"))
+            }
+            else if (input.StartsWith("build") && input.EndsWith("boat"))
+            {
+                int woodCount = world.Player.Wood;
+
+                if (woodCount >= 4)
                 {
-                    world.Player.Move(1, 0, world);
-                }
-                else if (input.EndsWith("south"))
-                {
-                    world.Player.Move(0, -1, world);
-                }
-                else if (input.EndsWith("west"))
-                {
-                    world.Player.Move(-1, 0, world);
+                    world.Player.Wood -= 4;
+                    world.Player.HasBoat = true;
+                    Console.WriteLine(" You built a boat with 4 of the wood that you have.");
                 }
                 else
                 {
-                    Console.WriteLine($" I do not know how to go to the \"{input}\"");
+                    Console.WriteLine($" You only have {woodCount} wood, you need 4 wood to build a boat.");
                 }
+            }
+            else if (input.StartsWith("help"))
+            {
+                Console.WriteLine(" how to win: move around and find the axe to cut down the trees. Then craft a boat to get over the water.\n Finally get the food to get up the mountain.\n\n commands (only necessary parts):\n  \"go [north|east|south|west]\" to move around,\n  \"craft boat\" crafts a boat if you have at least 4 wood,\n  \"help\" brings up this prompt");
             }
             else
             {
@@ -58,44 +71,15 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             }
         }
 
-        private string Prompt(string _message)
+        private bool TryMoveInput(string _input, string _endsWith, int _dX, int _dY)
         {
-            string? input;
-            Console.WriteLine(' ' + _message);
-
-            do
+            if (_input.EndsWith(_endsWith))
             {
-                int row = Console.GetCursorPosition().Top;
-
-                ClearLine();
-                Console.Write(" > ");
-                input = Console.ReadLine();
-
-                if (input != null)
-                {
-                    input = input.Trim();
-                }
-
-                Console.SetCursorPosition(0, row);
+                world.Player.Move(_dX, _dY, world);
+                return true;
             }
-            while (string.IsNullOrEmpty(input));
 
-            Console.WriteLine('-');
-
-            return input;
-        }
-
-        /// <summary>
-        /// clears the line of the current cursor's position
-        /// </summary>
-        private void ClearLine()
-        {
-#warning imported from Dialogue class, find a better solution.
-            int row = Console.GetCursorPosition().Top; //gets what line the cursor is currently at
-
-            Console.SetCursorPosition(0, row); //set's the cursor in the current line at position 0
-            Console.Write(new string(' ', Console.BufferWidth)); //writes the space character over the entire width of the console
-            Console.SetCursorPosition(0, row); //reset's the console's cursor position
+            return false;
         }
     }
 }

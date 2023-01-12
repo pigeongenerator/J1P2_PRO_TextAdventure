@@ -19,12 +19,24 @@ namespace J1P2_PRO_TextAdventure.GameScripts
             }
 
             Debug.WriteLine($"Ended loop {this}");
+            OnEnd();
         }
 
         /// <summary>
-        /// is called once when the loop starts
+        /// is called once the loop starts
         /// </summary>
-        protected abstract void OnStart();
+        protected virtual void OnStart()
+        {
+            Debug.WriteLine($"loop {this} hasn't overwritten {OnStart}.");
+        }
+
+        /// <summary>
+        /// is called once the loop ends
+        /// </summary>
+        protected virtual void OnEnd()
+        {
+            Debug.WriteLine($"loop {this} hasn't overwritten {OnEnd}.");
+        }
 
         /// <summary>
         /// is called once at the start of each loop to check if the loop should keep running
@@ -36,5 +48,6 @@ namespace J1P2_PRO_TextAdventure.GameScripts
         /// is called during the loop
         /// </summary>
         protected abstract void DuringLoop();
+
     }
 }

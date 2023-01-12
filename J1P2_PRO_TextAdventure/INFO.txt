@@ -12,7 +12,7 @@
 
 Technische eisen:
 	O Collection (list & array)
-	O Loop (foreach, for, while & do while)
+	O Loop (foreach, for, while & do while)										-> missing do while
 	O Conditional statements (switch statement & if, else if, else)
 	V Method met return type
 	V Method met parameters

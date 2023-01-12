@@ -17,7 +17,6 @@
         {
             const int size = 5;
 
-            Random random = new();
             Tile[,] tiles = new Tile[size, size];
             TileType[,] types = new TileType[size, size]
             {
@@ -33,12 +32,12 @@
                 for (int y = 0; y < size; y++)
                 {
 #warning make min 3 spots where the food may appear at and randomly select one of them
-                    tiles[x, y] = new Tile(types[y, x]);
+                    tiles[y, Math.Abs(x - size) - 1] = new Tile(types[x, y]);
 
-                    if (types[y, x] == TileType.start)
+                    if (types[x, y] == TileType.start)
                     {
-                        playerPos[0] = x;
-                        playerPos[1] = y;
+                        playerPos[0] = y;
+                        playerPos[1] = x;
                     }
                 }
             }
