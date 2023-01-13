@@ -63,7 +63,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             }
             else if (input.StartsWith("help"))
             {
-                Console.WriteLine(" how to win: move around and find the axe to cut down the trees. Then craft a boat to get over the water.\n Finally get the food to get up the mountain.\n\n commands (only necessary parts):\n  \"go [north|east|south|west]\" to move around,\n  \"craft boat\" crafts a boat if you have at least 4 wood,\n  \"help\" brings up this prompt");
+                Console.WriteLine(" how to win: move around and find the rusty axe to cut down the trees. Then craft a boat to get over the water.\n Finally get the food to get up the mountain.\n\n commands (only necessary parts):\n  \"go [north|east|south|west]\" to move around,\n  \"craft boat\" crafts a boat if you have at least 4 wood,\n  \"help\" brings up this prompt");
             }
             else
             {

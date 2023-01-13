@@ -48,7 +48,7 @@
             {
                 TileType.shrubbery => "You were unable to get through the shrubberies.",
                 TileType.grass => "You see nothing of interest here.",
-                TileType.axe => "You found an axe!",
+                TileType.axe => "You found a rusty axe!",
                 TileType.food => "You found a can of beans on a small island, you ate the beans and feel recharged!",
                 TileType.start => "This is where you landed after your fall.",
                 TileType.water => ConditianalMessage(_player, "You used the boat to get on the water.", "There is a lake here, you see something glistering in the distance. However, the water\n is too deep to swim safely when you are this exhausted."),

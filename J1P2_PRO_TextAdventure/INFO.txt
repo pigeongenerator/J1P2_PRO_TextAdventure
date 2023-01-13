@@ -11,9 +11,9 @@
 	V Geen goto!
 
 Technische eisen:
-	O Collection (list & array)
+	O Collection (list & array)													-> missling list
 	O Loop (foreach, for, while & do while)										-> missing do while
-	O Conditional statements (switch statement & if, else if, else)
+	V Conditional statements (switch statement & if, else if, else)
 	V Method met return type
 	V Method met parameters
 	V Classes (OOP)
@@ -23,3 +23,5 @@ Technische eisen:
 		O Collection(dictonary)
 		V Correcte Access Modifiers
 		V Class constructors
+
+make help applicable to the player's current situation
