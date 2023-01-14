@@ -20,6 +20,13 @@
 
         public Tile GetTile(int _x, int _y) => world[_x, _y];
 
+        public Tile GetPlayerTile()
+        {
+            (int x, int y) = player.GetPosition();
+
+            return GetTile(x, y);
+        }
+
         public int GetSize(int _dimention) => world.GetLength(_dimention);
     }
 }

@@ -8,7 +8,7 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
         private readonly World world;
 
 
-        public TakeCommand(Player _player, World _world) : base("take", "", "axe", "beans")
+        public TakeCommand(Player _player, World _world) : base("take")
         {
             player = _player;
             world = _world;
@@ -16,14 +16,13 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
 
         public override void Run()
         {
-            int x = player.GetPosition().x;
-            int y = player.GetPosition().y;
-            Tile currentTile = world.GetTile(x, y);
+            Tile currentTile = world.GetPlayerTile();
 
             switch (currentTile.Type)
             {
                 case TileType.axe:
                     player.HasAxe = true;
+                    currentTile.Type = TileType.grass;
                     Console.WriteLine("You took the rusty axe.");
                     break;
 

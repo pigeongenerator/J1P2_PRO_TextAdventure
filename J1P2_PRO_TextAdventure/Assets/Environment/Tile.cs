@@ -4,7 +4,11 @@
     {
         private TileType type;
 
-        public TileType Type { get { return type; } }
+        public TileType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
 
         public Tile(TileType _type)
@@ -72,8 +76,7 @@
                 TileType.mountain => !_player.IsHungry,
                 TileType.shrubbery => false,
                 _ => true,
-            };;
-            ;
+            };
         }
 
         private string ConditianalMessage(Player _player, string _successEnterMessage, string _failedEnterMessage)
