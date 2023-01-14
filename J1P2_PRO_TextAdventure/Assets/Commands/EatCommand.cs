@@ -4,14 +4,14 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
 {
     internal class EatCommand : Command
     {
-        Player player;
-        World world;
+        private readonly World world;
+        private readonly Player player;
 
 
-        public EatCommand(Player _player, World _world) : base("eat")
+        public EatCommand(World _world, Player _player) : base("eat")
         {
-            player = _player;
             world = _world;
+            player = _player;
         }
 
         public override void Run()

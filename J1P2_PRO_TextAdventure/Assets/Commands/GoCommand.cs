@@ -4,14 +4,14 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
 {
     internal class GoCommand : Command
     {
-        private readonly Player player;
         private readonly World world;
+        private readonly Player player;
 
 
-        public GoCommand(Player _player, World _world) : base("go", "north", "east", "south", "west")
+        public GoCommand(World _world, Player _player) : base("go", "north", "east", "south", "west")
         {
-            player = _player;
             world = _world;
+            player = _player;
         }
 
         public override void Run()

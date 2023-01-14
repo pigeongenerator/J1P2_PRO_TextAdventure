@@ -4,14 +4,14 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
 {
     internal class TakeCommand : Command
     {
-        private readonly Player player;
         private readonly World world;
+        private readonly Player player;
 
 
-        public TakeCommand(Player _player, World _world) : base("take")
+        public TakeCommand(World _world, Player _player) : base("take")
         {
-            player = _player;
             world = _world;
+            player = _player;
         }
 
         public override void Run()
