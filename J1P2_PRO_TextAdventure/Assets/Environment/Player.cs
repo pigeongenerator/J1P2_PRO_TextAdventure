@@ -4,14 +4,37 @@
     {
         private readonly int[] pos;
         private int wood;
-        private bool hasAxe;
-        private bool hasBoat;
-        private bool isHungry;
+        private bool hasAxe, hasBoat, isHungry, hasFood;
 
-        public int Wood { get => wood; set => wood = value; }
-        public bool HasAxe { get => hasAxe; set => hasAxe = value; }
-        public bool HasBoat { get => hasBoat; set => hasBoat = value; }
-        public bool IsHungry { get => isHungry; set => isHungry = value; }
+        public int Wood
+        {
+            get => wood;
+            set => wood = value;
+        }
+
+        public bool HasAxe
+        {
+            get => hasAxe;
+            set => hasAxe = value;
+        }
+
+        public bool HasBoat
+        {
+            get => hasBoat;
+            set => hasBoat = value;
+        }
+
+        public bool IsHungry
+        {
+            get => isHungry;
+            set => isHungry = value;
+        }
+
+        public bool HasFood
+        {
+            get => hasFood;
+            set => hasFood = value;
+        }
 
 
         /// <summary>
@@ -24,7 +47,8 @@
             pos = new int[2] { _x, _y }; //assigns an array with the size of 2 and the parameters x, y to the variable
             hasAxe = false;
             hasBoat = false;
-            IsHungry = true;
+            isHungry = true;
+            hasFood = false;
         }
 
         /// <summary>

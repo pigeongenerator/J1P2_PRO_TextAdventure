@@ -15,7 +15,8 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             world = _world;
             commands = new Command[]
             {
-                new GoCommand(world.Player, world)
+                new GoCommand(world.Player, world),
+                new TakeCommand(world.Player, world)
             };
         }
 
