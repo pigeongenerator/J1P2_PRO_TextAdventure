@@ -52,9 +52,6 @@
             x = newPos[0];
             y = newPos[1];
 
-#warning writing to console should only happen in the game, not in the assets.
-            Console.WriteLine(' ' + tileTryMovedTo.OnEnter(this));
-
             if (tileTryMovedTo.CanEnter(this))
             {
                 tileTryMovedTo.Enter(this);

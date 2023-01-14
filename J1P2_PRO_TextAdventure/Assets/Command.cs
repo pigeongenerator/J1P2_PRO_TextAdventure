@@ -23,20 +23,18 @@
             argument = null;
         }
 
-        public bool TryRunCommand(string _value)
+        public bool IsCommand(string _value)
         {
             if (_value.StartsWith(keyword) && arguments == null)
             {
-                OnRun();
                 return true;
             }
-            else if (_value.StartsWith(keyword))
+            else if (_value.Contains(keyword))
             {
-                argument = GetArgument(keyword);
+                argument = GetArgument(_value);
 
                 if (argument != null)
                 {
-                    OnRun();
                     return true;
                 }
             }
@@ -53,7 +51,7 @@
 
             foreach (string argument in arguments)
             {
-                if (_value.EndsWith(argument))
+                if (_value.Contains(argument))
                 {
                     return argument;
                 }
@@ -62,6 +60,6 @@
             return null;
         }
 
-        protected abstract void OnRun();
+        public abstract void Run();
     }
 }
