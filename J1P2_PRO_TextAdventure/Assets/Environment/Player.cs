@@ -8,10 +8,10 @@
         private bool hasBoat;
         private bool isHungry;
 
-        public int Wood { get { return wood; } set { wood = value; } }
-        public bool HasAxe { get { return hasAxe; } set { hasAxe = value; } }
-        public bool HasBoat { get { return hasBoat; } set { hasBoat = value; } }
-        public bool IsHungry { get { return isHungry; } set { isHungry = value; } }
+        public int Wood { get => wood; set => wood = value; }
+        public bool HasAxe { get => hasAxe; set => hasAxe = value; }
+        public bool HasBoat { get => hasBoat; set => hasBoat = value; }
+        public bool IsHungry { get => isHungry; set => isHungry = value; }
 
 
         /// <summary>
@@ -28,7 +28,7 @@
         }
 
         /// <summary>
-        /// moves the player relative to the current player
+        /// tries to move the player relative to the current player, moving may fail if the tile moved to is not marked as passable
         /// </summary>
         /// <param name="_dX">distance of the new player position in the x direction</param>
         /// <param name="_dY">distance of the new player position in the y direction</param>

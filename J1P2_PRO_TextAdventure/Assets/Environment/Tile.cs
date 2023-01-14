@@ -62,7 +62,7 @@
         /// checks if the player is allowed to enter the tile
         /// </summary>
         /// <param name="_player">the player to check</param>
-        /// <returns><c>true</c> if the player is allowed to enter, otherwise <c>false</c></returns>
+        /// <returns><see langword="true"/> if the player is allowed to enter, otherwise <see langword="false"/></returns>
         public bool CanEnter(Player _player)
         {
             return type switch
