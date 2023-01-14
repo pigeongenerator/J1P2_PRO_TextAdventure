@@ -1,4 +1,5 @@
 ﻿using J1P2_PRO_TextAdventure.Assets;
+using J1P2_PRO_TextAdventure.Assets.Commands;
 using J1P2_PRO_TextAdventure.Assets.Environment;
 
 namespace J1P2_PRO_TextAdventure.GameScripts.Loops
@@ -6,11 +7,16 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
     internal class MainLoop : Loop
     {
         private readonly World world;
+        private readonly Command[] commands;
 
 
         public MainLoop(World _world)
         {
             world = _world;
+            commands = new Command[]
+            {
+                new GoCommand(world.Player, world)
+            };
         }
 
         // start of MainLoop
@@ -37,7 +43,19 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
         //
         protected override void DuringLoop()
         {
+            string input;
+            InputLoop inputLoop = new();
 
+            inputLoop.Start();
+            input = inputLoop.GetInput();
+
+            foreach (Command command in commands)
+            {
+                if (command.IsCommand(input))
+                {
+                    command.Run();
+                }
+            }
         }
 
         // prints the final dialogue.
