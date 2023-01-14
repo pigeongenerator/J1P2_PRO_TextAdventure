@@ -17,6 +17,7 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
             if (player.Wood >= 4)
             {
                 player.Wood -= 4;
+                player.HasBoat = true;
                 Console.WriteLine("you made a boat from 4 wood!");
             }
             else

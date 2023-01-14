@@ -79,7 +79,6 @@
 
             if (tileTryMovedTo.CanEnter(this))
             {
-                tileTryMovedTo.Enter(this);
                 pos[0] = x;
                 pos[1] = y;
             }

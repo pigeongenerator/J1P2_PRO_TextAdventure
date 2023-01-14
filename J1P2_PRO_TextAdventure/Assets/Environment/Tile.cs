@@ -17,35 +17,10 @@
         }
 
         /// <summary>
-        /// modifies the player & the tile to what is appropriate based on <see cref="type"/>
-        /// </summary>
-        /// <param name="_player">the player to be modified</param>
-        public void Enter(Player _player)
-        {
-            switch (type)
-            {
-                case TileType.tree:
-                    _player.Wood += 1;
-                    type = TileType.grass;
-                    break;
-
-                case TileType.axe:
-                    _player.HasAxe = true;
-                    type = TileType.grass;
-                    break;
-
-                case TileType.food:
-                    _player.IsHungry = false;
-                    break;
-            };
-        }
-
-        /// <summary>
         /// gets the message that should be displayed upon entering this tile
         /// </summary>
         /// <param name="_player">the player to check</param>
-        /// <param name="_direction">the direction the player was traveling in</param>
-        /// <returns>the message based on <see cref="type"/></returns>
+        /// <returns>the message based on <see cref="Type"/></returns>
         public string OnEnter(Player _player)
         {
             return type switch

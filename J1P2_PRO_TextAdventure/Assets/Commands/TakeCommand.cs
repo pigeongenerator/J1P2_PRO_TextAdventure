@@ -28,7 +28,7 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
 
                 case TileType.food:
                     player.HasFood = true;
-                    Console.WriteLine("You took the food.");
+                    Console.WriteLine("You took the can o' beans.");
                     break;
 
                 default:

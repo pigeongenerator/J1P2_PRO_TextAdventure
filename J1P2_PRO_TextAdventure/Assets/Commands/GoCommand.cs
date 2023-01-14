@@ -31,7 +31,7 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
                     break;
 
                 case "west":
-                    MovePlayer(1, 0);
+                    MovePlayer(-1, 0);
                     break;
 
                 default:
