@@ -1,41 +1,53 @@
 ﻿using System.Diagnostics;
 
-namespace J1P2_PRO_TextAdventure.GameScripts;
-
-internal abstract class Loop : IGameScript
+namespace J1P2_PRO_TextAdventure.GameScripts
 {
     /// <summary>
-    /// starts the loop
+    /// 
     /// </summary>
-    public void Start()
+    internal abstract class Loop : GameScript
     {
-        Debug.WriteLine($"started loop {GetType()}");
-        OnStart();
-
-        do
+        protected override void Script()
         {
-            Debug.WriteLine($"{GetType()} started new loop");
-            DoLoop();
+            Debug.WriteLine($"Started loop {this}");
+            OnStart();
+
+            while ( LoopCondition() )
+            {
+                DuringLoop();
+                Debug.WriteLine($"Completed loop {this}");
+            }
+
+            Debug.WriteLine($"Ended loop {this}");
+            OnEnd();
         }
-        while (Check() == true);
-    }
 
-    /// <summary>
-    /// checks a condition whether the loop should remain running or not
-    /// </summary>
-    /// <returns>true/false based on the condition</returns>
-    protected abstract bool Check();
+        /// <summary>
+        /// is called once the loop starts
+        /// </summary>
+        protected virtual void OnStart()
+        {
+            Debug.WriteLine($"loop {this} hasn't overwritten {OnStart}.");
+        }
 
-    /// <summary>
-    /// contains all the code that should be looped
-    /// </summary>
-    protected abstract void DoLoop();
+        /// <summary>
+        /// is called once the loop ends
+        /// </summary>
+        protected virtual void OnEnd()
+        {
+            Debug.WriteLine($"loop {this} hasn't overwritten {OnEnd}.");
+        }
 
-    /// <summary>
-    /// the code that is ran before the loop starts
-    /// </summary>
-    protected virtual void OnStart()
-    {
-        Debug.WriteLine($"{nameof(OnStart)} has not been overwritten in Loop {GetType()}");
+        /// <summary>
+        /// is called once at the start of each loop to check if the loop should keep running
+        /// </summary>
+        /// <returns>true or false depending on the loop's condition</returns>
+        protected abstract bool LoopCondition();
+
+        /// <summary>
+        /// is called during the loop
+        /// </summary>
+        protected abstract void DuringLoop();
+
     }
 }

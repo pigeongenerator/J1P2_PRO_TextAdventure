@@ -1,17 +1,13 @@
-﻿using J1P2_PRO_TextAdventure.GameScripts;
+﻿using J1P2_PRO_TextAdventure.GameScripts; //uses the scripts from that namespace
 
-
-namespace J1P2_PRO_TextAdventure; //file-scoped namespace
-
-internal class Program //defines a class
+namespace J1P2_PRO_TextAdventure //sets the namespace (location)
 {
-    /// <summary>
-    /// starts the program
-    /// </summary>
-    /// <param name="_args">the paths of the files the program is opened with</param>
-    static void Main() //defines a static method which means that the method is accessible from anywhere the class is
+    internal class Program //defines an internal class which can only be accessed in it's own assembly
     {
-        Game game = new(); //defines a new game object
-        game.Start(); //calls the start method
+        public static void Main(string[] _args) //defines a method
+        {
+            Game game = new(); //initializes a new game object
+            game.Start(); //starts the game
+        }
     }
 }

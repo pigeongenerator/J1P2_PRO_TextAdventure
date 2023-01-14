@@ -1,303 +1,85 @@
-﻿using J1P2_PRO_TextAdventure.Assets;
-using J1P2_PRO_TextAdventure.Assets.Items;
-using J1P2_PRO_TextAdventure.Assets.Items.SpecialItems;
-using J1P2_PRO_TextAdventure.Assets.Rooms;
-using System.Diagnostics;
+﻿using J1P2_PRO_TextAdventure.Assets.Environment;
 
 namespace J1P2_PRO_TextAdventure.GameScripts.Loops
 {
     internal class MainLoop : Loop
     {
-        private readonly Workshop workshop;
-        private readonly Player player;
+        private readonly World world;
 
 
-        public MainLoop(Workshop _workshop, Player _player)
+        public MainLoop(World _world)
         {
-            workshop = _workshop;
-            player = _player;
+            world = _world;
         }
 
-        protected override bool Check()
+        protected override bool LoopCondition()
         {
-            Debug.WriteLine($"passed {nameof(MainLoop)} {nameof(Check)}, returning true.");
-            Debug.WriteLine($"the current player position is: {player.Position}, room name: {workshop.GetRoom(player.Position.row, player.Position.column).RoomName}");
+            (int posX, int posY) = world.Player.GetPosition();
+
+            if (world.GetTile(posX, posY).Type == TileType.mountain)
+            {
+                return false;
+            }
+
             return true;
         }
 
-        protected override void DoLoop()
+        protected override void DuringLoop()
         {
             string input;
-            Room playerRoom = GetPlayerRoom();
+            InputLoop inputLoop = new("What do you want to do?");
 
-            Console.WriteLine($"\nyou find yourself in {GetArticle(playerRoom.RoomName)} {playerRoom.RoomName}, you see{ListItems(playerRoom.RoomItems)}");
-            input = GetInput("what do you want to do?");
+            Console.WriteLine();
+            inputLoop.Start();
 
-            //TEMPORARY COMMAND SYSTEM, YOU REALLY NEED TO REPLACE THIS AS SOON AS POSSIBLE
-            if ( input.StartsWith("open") )
-            {
+            input = inputLoop.GetInput();
 
-                OpenDoor(playerRoom.RoomDoor);
-            }
-            else if ( input.StartsWith("go") )
+#warning please find a better solution for input
+            if (input.StartsWith("go"))
             {
-                GoThroughDoor(playerRoom.RoomDoor);
-            }
-            else if ( input.StartsWith("take") )
-            {
-                input = GetInput("what do you want to take?");
-                TakeItem(input, playerRoom);
-            }
-            else if ( input.StartsWith("inventory") )
-            {
-                string itemListed = ListItems(player.InventoryItems);
-                Console.WriteLine($"you have{itemListed}.\n");
-            }
-            else if ( input.StartsWith("eat") )
-            {
-                EatItem(playerRoom);
-            }
-            else if ( input.StartsWith("use") )
-            {
-                input = GetInput("what do you want to use?");
-                if ( ItemUsable(input) )
+                if (TryMoveInput(input, "north", 0, 1)) { }
+                else if (TryMoveInput(input, "east", 1, 0)) { }
+                else if (TryMoveInput(input, "south", 0, -1)) { }
+                else if (TryMoveInput(input, "west", -1, 0)) { }
+                else
                 {
-                    Console.WriteLine(player.GetItem(input).OnUse());
+                    Console.WriteLine(" You don't know how to go there.");
+                }
+            }
+            else if (input.StartsWith("build") && input.EndsWith("boat"))
+            {
+                int woodCount = world.Player.Wood;
+
+                if (woodCount >= 4)
+                {
+                    world.Player.Wood -= 4;
+                    world.Player.HasBoat = true;
+                    Console.WriteLine(" You built a boat with 4 of the wood that you have.");
                 }
                 else
                 {
-                    Console.WriteLine($"you don't understand how to use: {input}\n");
+                    Console.WriteLine($" You only have {woodCount} wood, you need 4 wood to build a boat.");
                 }
+            }
+            else if (input.StartsWith("help"))
+            {
+                Console.WriteLine(" how to win: move around and find the rusty axe to cut down the trees. Then craft a boat to get over the water.\n Finally get the food to get up the mountain.\n\n commands (only necessary parts):\n  \"go [north|east|south|west]\" to move around,\n  \"craft boat\" crafts a boat if you have at least 4 wood,\n  \"help\" brings up this prompt");
             }
             else
             {
-                Console.WriteLine($"you don't know this thing: {input}\n");
+                Console.WriteLine($" I do not know how to do this thing: \"{input}\"");
             }
         }
 
-        /// <summary>
-        /// creates the prompt for eating items and eats the item if one was found
-        /// </summary>
-        /// <param name="_playerRoom">set's the room where the item needs to be searched</param>
-        private void EatItem(Room _playerRoom)
+        private bool TryMoveInput(string _input, string _endsWith, int _dX, int _dY)
         {
-            string itemName = GetInput("what do you want to eat?");
-            Item eatItem;
-
-            if ( player.HasItem(itemName) )
+            if (_input.EndsWith(_endsWith))
             {
-                eatItem = player.GetItem(itemName);
-                if ( eatItem.IsEatable )
-                {
-                    player.RemoveItem(eatItem);
-                }
-            }
-            else if ( _playerRoom.HasItem(itemName, true) )
-            {
-                eatItem = _playerRoom.GetItem(itemName, true);
-                if ( eatItem.IsEatable )
-                {
-                    _playerRoom.RemoveItem(itemName);
-                }
-            }
-            else
-            {
-                Console.WriteLine($"You don't know how to eat this: {itemName}\n");
-                return;
-            }
-
-            Console.WriteLine($"{eatItem.OnEat()}\n");
-        }
-
-        /// <summary>
-        /// takes an item from the room and puts it into the player's inventory
-        /// </summary>
-        /// <param name="_itemName">set's the name of the item to take</param>
-        /// <param name="_playerRoom">set's the room that should be looked in for the item</param>
-        private void TakeItem(string _itemName, Room _playerRoom)
-        {
-            if ( _playerRoom.HasItem(_itemName) == false )
-            {
-                Console.WriteLine($"you don't see this thing: {_itemName}\n");
-                return;
-            }
-
-            Console.WriteLine($"you took the {_itemName}.\n");
-            player.AddToInventory(_playerRoom.GetItem(_itemName));
-            _playerRoom.RemoveItem(_itemName);
-        }
-
-        /// <summary>
-        /// get's the players input with a prompt, will retry endlessly until an input that is neither null or string.Empty
-        /// </summary>
-        /// <param name="_prompt">sets the prompt</param>
-        /// <returns>a string</returns>
-        private string GetInput(string _prompt)
-        {
-            string? input;
-
-            Console.WriteLine(_prompt);
-            Console.Write(" > ");
-            (int x, int y) = Console.GetCursorPosition();
-
-            do
-            {
-                Console.SetCursorPosition(x, y);
-                input = Console.ReadLine();
-            }
-            while ( string.IsNullOrEmpty(input) );
-
-            Console.WriteLine();
-
-            return input;
-        }
-
-        /// <summary>
-        /// creates a list of the items given
-        /// </summary>
-        /// <param name="_itemList">The list of items to check</param>
-        /// <returns>a list with the proper article for each item</returns>
-        private string ListItems(Item[] _itemList)
-        {
-            string output = string.Empty;
-
-            foreach ( Item item in _itemList )
-            {
-                string itemName = item.ItemName;
-
-                if ( IsOpenDoor(item) )
-                {
-                    itemName = "open " + itemName;
-                }
-
-
-                output += $", {GetArticle(itemName)} {itemName}";
-            }
-
-            if ( _itemList.Length == 0 )
-            {
-                output += " nothing";
-            }
-
-            return output;
-        }
-
-        /// <summary>
-        /// makes the player go through a door and moves them to the new location
-        /// </summary>
-        /// <param name="_door">set's the door that the player needs to go through</param>
-        private void GoThroughDoor(DoorItem _door)
-        {
-            (int row, int column) = _door.DoorLeadsTo;
-
-            if ( _door.IsOpen == false )
-            {
-                Console.WriteLine("you can't go through closed doors silly!\n");
-                return;
-            }
-            if ( _door.IsLocked )
-            {
-                Console.WriteLine("this door is locked!\n");
-                return;
-            }
-
-            Console.WriteLine("you walked through the door.\n");
-            player.MoveTo(row, column, workshop);
-        }
-
-        /// <summary>
-        /// opens the door, checks if the door is locked
-        /// </summary>
-        /// <param name="_door">set's the door to be opened</param>
-        private void OpenDoor(DoorItem _door)
-        {
-            Console.WriteLine(_door.OnUse() + '\n');
-        }
-
-        /// <summary>
-        /// gets if the current item is an open door
-        /// </summary>
-        /// <param name="_item">set's the item to check</param>
-        /// <returns>true if it is an open door, otherwise false</returns>
-        private bool IsOpenDoor(Item _item)
-        {
-            if ( _item.GetType() == typeof(DoorItem) )
-            {
-                DoorItem door = (DoorItem)_item;
-                return door.IsOpen;
+                world.Player.Move(_dX, _dY, world);
+                return true;
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// gets if the item is usable or not
-        /// </summary>
-        /// <param name="_itemName">set's the item name for the item to search</param>
-        /// <returns>true if the item is usable, false if it is not or if no matching items were found</returns>
-        private bool ItemUsable(string _itemName)
-        {
-            if ( player.HasItem(_itemName) )
-            {
-                Item useItem = player.GetItem(_itemName);
-                if ( useItem.IsUsable )
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// get's the room the player is currently standing in
-        /// </summary>
-        /// <returns>the room the player is standing in</returns>
-        private Room GetPlayerRoom()
-        {
-            (int playerRowPos, int playerColumnPos) = workshop.Player.Position;
-            Room playerRoom = workshop.GetRoom(playerRowPos, playerColumnPos);
-
-            return playerRoom;
-        }
-
-        /// <summary>
-        /// get's the article for a string
-        /// </summary>
-        /// <param name="_getFor">set's the value that the article should be get from</param>
-        /// <returns>"an" if the string starts with a vowel, "a" if it doesn't</returns>
-        private string GetArticle(string _getFor)
-        {
-            string article;
-
-            article = StartsWithVowel(_getFor) ? "an" : "a"; //if the item name starts with a vowel, the article is "an". otherwise it is "a"
-
-            return article;
-
-
-            bool StartsWithVowel(string _value)
-            {
-                switch ( _value[0] )
-                {
-                    case 'a':
-                        return true;
-
-                    case 'e':
-                        return true;
-
-                    case 'i':
-                        return true;
-
-                    case 'o':
-                        return true;
-
-                    case 'u':
-                        return true;
-
-                    default:
-                        return false;
-                }
-            }
         }
     }
 }
