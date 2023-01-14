@@ -52,11 +52,11 @@
             {
                 TileType.shrubbery => "You were unable to get through the shrubberies.",
                 TileType.grass => "You see nothing of interest here.",
-                TileType.axe => "You found a rusty axe!",
-                TileType.food => "You found a can of beans on a small island, you ate the beans and feel recharged!",
-                TileType.start => "This is where you landed after your fall.",
+                TileType.axe => "You see a rusty axe hidden in the grass!",
+                TileType.food => "You see a can of beans hidden in the grass!",
+                TileType.start => "This is where you landed after your fall. Kind of.. eerie.",
+                TileType.tree => "There is a small tree here.",
                 TileType.water => ConditianalMessage(_player, "You used the boat to get on the water.", "There is a lake here, you see something glistering in the distance. However, the water\n is too deep to swim safely when you are this exhausted."),
-                TileType.tree => ConditianalMessage(_player, $"You chopped down the tree and got some wood, you now have {_player.Wood + 1} wood.", "There is a tree here; you can't go through trees."),
                 TileType.mountain => ConditianalMessage(_player, "You climbed up the mountain.", "This is the mountain you fell off, you are too hungry to climb. You see your RV up there, it's burnt to a crisp."),
                 _ => throw new NotImplementedException()
             };
@@ -72,7 +72,6 @@
             return type switch
             {
                 TileType.water => _player.HasBoat,
-                TileType.tree => _player.HasAxe,
                 TileType.mountain => !_player.IsHungry,
                 TileType.shrubbery => false,
                 _ => true,
