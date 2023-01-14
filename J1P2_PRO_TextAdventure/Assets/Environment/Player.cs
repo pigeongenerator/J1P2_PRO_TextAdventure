@@ -67,11 +67,12 @@
 
             for (int i = 0; i < newPos.Length; i++)
             {
-                if (newPos[i] < 0 || newPos[i] >= _world.GetSize(i))
+                if (newPos[i] < 0 || newPos[i] >= _world.GetSize())
                 {
                     newPos[i] = pos[i];
                 }
             }
+
 
             x = newPos[0];
             y = newPos[1];

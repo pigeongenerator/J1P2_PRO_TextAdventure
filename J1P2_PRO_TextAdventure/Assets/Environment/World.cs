@@ -27,6 +27,6 @@
             return GetTile(x, y);
         }
 
-        public int GetSize(int _dimention) => world.GetLength(_dimention);
+        public int GetSize() => world.GetLength(0); //world is a square
     }
 }

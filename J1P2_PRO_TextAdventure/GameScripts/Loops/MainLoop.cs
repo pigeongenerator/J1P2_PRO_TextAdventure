@@ -20,6 +20,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
                 new EatCommand(world, world.Player),
                 new UseCommand(world, world.Player),
                 new MakeCommand(world.Player),
+                new LookCommand(world, world.Player),
             };
         }
 
