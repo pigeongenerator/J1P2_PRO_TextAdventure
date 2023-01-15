@@ -67,7 +67,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
 
             if (commandSuccess == false)
             {
-                Console.WriteLine($"I don't know how to: \"{input}\".");
+                Console.WriteLine($"You don't know how to: \"{input}\".");
             }
         }
 
