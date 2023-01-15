@@ -15,16 +15,18 @@
 
         public Tile[,] GenTiles()
         {
-            const int size = 5;
+            const int size = 7;
 
             Tile[,] tiles = new Tile[size, size];
             TileType[,] types = new TileType[size, size]
             {
-                { TileType.shrubbery,   TileType.shrubbery, TileType.shrubbery, TileType.shrubbery, TileType.shrubbery },
-                { TileType.shrubbery,   TileType.tree,      TileType.tree,      TileType.shrubbery, TileType.shrubbery },
-                { TileType.mountain,    TileType.start,     TileType.grass,     TileType.axe,       TileType.shrubbery },
-                { TileType.tree,        TileType.grass,     TileType.tree,      TileType.water,     TileType.shrubbery },
-                { TileType.shrubbery,   TileType.shrubbery, TileType.water,     TileType.food,      TileType.shrubbery }
+                { TileType.shrubbery, TileType.shrubbery, TileType.shrubbery, TileType.shrubbery, TileType.shrubbery, TileType.shrubbery, TileType.shrubbery },
+                { TileType.shrubbery, TileType.tree,      TileType.grass,     TileType.water,     TileType.food,      TileType.water,      TileType.shrubbery },
+                { TileType.mountain,  TileType.start,     TileType.grass,     TileType.tree,      TileType.water,     TileType.food,      TileType.shrubbery },
+                { TileType.mountain,  TileType.grass,     TileType.tree,      TileType.grass,     TileType.grass,     TileType.water,      TileType.shrubbery },
+                { TileType.shrubbery, TileType.shrubbery, TileType.shrubbery, TileType.tree,      TileType.grass,     TileType.water,      TileType.shrubbery },
+                { TileType.shrubbery, TileType.axe,       TileType.tree,      TileType.grass,     TileType.water,     TileType.food,      TileType.shrubbery },
+                { TileType.shrubbery, TileType.shrubbery, TileType.shrubbery, TileType.shrubbery, TileType.shrubbery, TileType.shrubbery, TileType.shrubbery }
             };
 
             for (int x = 0; x < size; x++)
