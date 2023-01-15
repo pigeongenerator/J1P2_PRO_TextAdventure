@@ -4,37 +4,14 @@
     {
         private readonly int[] pos;
         private int wood;
-        private bool hasAxe, hasBoat, isHungry, hasFood;
+        private bool hasAxe;
+        private bool hasBoat;
+        private bool isHungry;
 
-        public int Wood
-        {
-            get => wood;
-            set => wood = value;
-        }
-
-        public bool HasAxe
-        {
-            get => hasAxe;
-            set => hasAxe = value;
-        }
-
-        public bool HasBoat
-        {
-            get => hasBoat;
-            set => hasBoat = value;
-        }
-
-        public bool IsHungry
-        {
-            get => isHungry;
-            set => isHungry = value;
-        }
-
-        public bool HasFood
-        {
-            get => hasFood;
-            set => hasFood = value;
-        }
+        public int Wood { get { return wood; } set { wood = value; } }
+        public bool HasAxe { get { return hasAxe; } set { hasAxe = value; } }
+        public bool HasBoat { get { return hasBoat; } set { hasBoat = value; } }
+        public bool IsHungry { get { return isHungry; } set { isHungry = value; } }
 
 
         /// <summary>
@@ -47,12 +24,11 @@
             pos = new int[2] { _x, _y }; //assigns an array with the size of 2 and the parameters x, y to the variable
             hasAxe = false;
             hasBoat = false;
-            isHungry = true;
-            hasFood = false;
+            IsHungry = true;
         }
 
         /// <summary>
-        /// tries to move the player relative to the current player, moving may fail if the tile moved to is not marked as passable
+        /// moves the player relative to the current player
         /// </summary>
         /// <param name="_dX">distance of the new player position in the x direction</param>
         /// <param name="_dY">distance of the new player position in the y direction</param>
@@ -67,18 +43,21 @@
 
             for (int i = 0; i < newPos.Length; i++)
             {
-                if (newPos[i] < 0 || newPos[i] >= _world.GetSize())
+                if (newPos[i] < 0 || newPos[i] >= _world.GetSize(i))
                 {
                     newPos[i] = pos[i];
                 }
             }
 
-
             x = newPos[0];
             y = newPos[1];
 
+#warning writing to console should only happen in the game, not in the assets.
+            Console.WriteLine(' ' + tileTryMovedTo.OnEnter(this));
+
             if (tileTryMovedTo.CanEnter(this))
             {
+                tileTryMovedTo.Enter(this);
                 pos[0] = x;
                 pos[1] = y;
             }

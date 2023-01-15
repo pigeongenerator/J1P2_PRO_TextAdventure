@@ -8,11 +8,29 @@ namespace J1P2_PRO_TextAdventure.GameScripts
     {
         protected override void Script()
         {
-            World world = new();
+            World world = new World();
             MainLoop mainLoop = new(world);
+            Dialogue endDialogue;
+            Dialogue finalDialogue;
 
             Welcome();
             mainLoop.Start();
+
+            endDialogue = new(
+                "it was a excruciating climb, but Jesse managed it just because of the beans.",
+                "Jesse inspected the RV, the equipment didn't survive but luckily the built cool-box protected some food and water from the flames.",
+                "Jesse started walking.",
+                "and walking..",
+                "and walking...",
+                "after a full week of walking Jesse ran out of water",
+                "Then finally, a car drove by.",
+                "Jesse tried to hitch hike and the car stopped",
+                "Jesse explained the situation and the person was glad to help");
+            endDialogue.Start();
+
+            finalDialogue = new("Finally when reaching Jesse's family, Jesse was very happy to see them and told them all about his adventure.");
+            finalDialogue.ContinuePrompt = "the end.";
+            finalDialogue.Start();
         }
 
         /// <summary>

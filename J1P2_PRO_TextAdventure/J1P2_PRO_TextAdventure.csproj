@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CommandInput\**" />
+    <EmbeddedResource Remove="CommandInput\**" />
+    <None Remove="CommandInput\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Assets\ASCII\title.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
