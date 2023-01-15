@@ -4,8 +4,8 @@
 	- Geen onnodige herhaling van code!
 
 	O Beschrijvende comments bij je code.
-	O Cover art gemaakt
 	O Random event/willekeurige gebeurtenis in je spel.							-> location of FOOD
+	~ Cover art gemaakt
 	V Er is een Potoo verwerkt in het spel.
 	V Externe bestanden gebruikt voor ASCII art.
 	V Geen goto!
@@ -19,8 +19,8 @@ Technische eisen:
 	V Classes (OOP)
 		
 	Optionele technische eisen:
-		O ASCII art animatie.
-		O Collection(dictonary)
+		X ASCII art animatie.
+		X Collection(dictonary)
 		V Correcte Access Modifiers
 		V Class constructors
 
