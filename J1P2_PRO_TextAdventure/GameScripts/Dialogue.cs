@@ -23,7 +23,7 @@
         /// </summary>
         public void SetIndent(int _value)
         {
-            if ( _value < 0 ) //runs the code below if _value is below 0
+            if (_value < 0) //runs the code below if _value is below 0
             { throw new ArgumentOutOfRangeException($"{nameof(_value)}", _value, $"{nameof(_value)} cannot be below 0"); } //throws an exception
 
             indent = _value; //assigns a value to a variable
@@ -43,37 +43,28 @@
 
         protected override void Script()
         {
+            #warning this also needs to be changed
+            ConsoleManager consoleManager = new();
+
+
             Console.CursorVisible = false; //hides the cursor in the console output
 
-            foreach ( string line in dialogueLines ) //loops through each item in the array
+            foreach (string line in dialogueLines) //loops through each item in the array
             {
-                Console.WriteLine(new string(' ', indent) + line); //concatenates a value with the value of line
+                consoleManager.WriteAtColumn(indent, line + '\n'); //concatenates the string so newline (\n), is at the end
 
 
-                Console.Write(new string(' ', indent)); //initializes a new string with a character repeated a curtain amount of times
-                (Console.ForegroundColor, Console.BackgroundColor) = (Console.BackgroundColor, Console.ForegroundColor); //flip's the console's foreground and background colors using a tuple
-                Console.Write(continuePrompt); //writes to console
+                consoleManager.FlipColors(); //flip's the console's colors
+                consoleManager.WriteAtColumn(indent, continuePrompt); //writes to console
 
 
                 Console.ReadKey(true); //halts the thread until the user gives input, this input is intercepted to be empty
 
-                Console.ResetColor(); //resets the console's color to be
-                ClearLine(); //clears the current line on the console.
+                Console.ResetColor(); //resets the console's color
+                consoleManager.ClearLine(); //clears the current line in the console.
             }
 
             Console.CursorVisible = true;
-        }
-
-        /// <summary>
-        /// clears the line of the current cursor's position
-        /// </summary>
-        private void ClearLine()
-        {
-            int row = Console.GetCursorPosition().Top; //gets what line the cursor is currently at
-
-            Console.SetCursorPosition(0, row); //set's the cursor in the current line at position 0
-            Console.Write(new string(' ', Console.BufferWidth)); //writes the space character over the entire width of the console
-            Console.SetCursorPosition(0, row); //reset's the console's cursor position
         }
     }
 }
