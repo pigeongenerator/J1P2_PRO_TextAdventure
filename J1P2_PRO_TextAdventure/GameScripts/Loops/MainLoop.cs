@@ -49,6 +49,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
         protected override void DuringLoop()
         {
             string input;
+            bool commandSuccess = false;
             InputLoop inputLoop = new();
 
             inputLoop.Start();
@@ -59,7 +60,13 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
                 if (command.IsCommand(input))
                 {
                     command.Run();
+                    commandSuccess = true;
                 }
+            }
+
+            if (commandSuccess == false)
+            {
+                Console.WriteLine($"I don't know how to: \"{input}\".");
             }
         }
 
