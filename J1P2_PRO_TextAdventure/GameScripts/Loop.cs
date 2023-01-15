@@ -7,9 +7,6 @@ namespace J1P2_PRO_TextAdventure.GameScripts
     /// </summary>
     internal abstract class Loop : GameScript
     {
-        /// <summary>
-        /// contains the loop
-        /// </summary>
         protected override void Script()
         {
             Debug.WriteLine($"Started loop {this}");

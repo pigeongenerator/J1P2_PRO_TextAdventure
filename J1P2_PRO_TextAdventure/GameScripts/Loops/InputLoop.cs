@@ -3,54 +3,82 @@
     internal class InputLoop : Loop
     {
         private string? input;
-        int originColumn, originRow;
+        private readonly string message;
 
 
-        /// <summary>
-        /// gets the input, if no input was given <see cref="InvalidOperationException"/> is called
-        /// </summary>
-        /// <returns>the input</returns>
-        /// <exception cref="InvalidOperationException"></exception>
+        public InputLoop(string _message)
+        {
+            message = _message;
+        }
+
         public string GetInput()
         {
-            if (input == null)
+            if (input != null)
             {
-                throw new InvalidOperationException("You need to run the loop before getting the input!");
+                return input;
             }
 
-            return input.Trim().ToLower(); //formats input by removing spaces to the left & right and making it lowercase.
+            throw new InvalidOperationException("no input has been assigned yet! (start the loop before requesting the input)");
         }
 
         protected override void OnStart()
         {
-            (int column, int row) originPos;
-
-            Console.WriteLine("\nWhat do you want to do?");
-            Console.Write(" > ");
-            originPos = Console.GetCursorPosition();
-
-            originRow = originPos.row;
-            originColumn = originPos.column;
+            Console.WriteLine(' ' + message);
         }
 
-        //as long that input is null or empty, the loop will loop
         protected override bool LoopCondition()
         {
             return string.IsNullOrEmpty(input);
         }
 
-        //gets input from the user
         protected override void DuringLoop()
         {
-            Console.SetCursorPosition(originColumn, originRow);
-            input = Console.ReadLine(); //gets input from the user and stores it in a variable
+            int row = Console.GetCursorPosition().Top; //gets what line the cursor is currently at
+
+            ClearLine();
+            Console.Write(" > ");
+
+            /*Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("e.g. go to north");
+            SetHorizontalCursorPos(3);
+            Console.ResetColor();*/
+
+            input = Console.ReadLine();
+
+            if (input != null)
+            {
+                input = input.Trim();
+            }
+
+            Console.SetCursorPosition(1, row);
+            Console.Write(' ');
         }
 
-        //removes the '>' from the prompt because the user is no longer giving input
         protected override void OnEnd()
         {
-            Console.SetCursorPosition(originColumn - 2, originRow);
-            Console.WriteLine(' ');
+            Console.WriteLine();
+        }
+
+#warning imported from Dialogue class, find a better solution.
+        /// <summary>
+        /// clears the line of the current cursor's position
+        /// </summary>
+        private void ClearLine()
+        {
+            SetHorizontalCursorPos(0); //set's the cursor in the current line at position 0
+            Console.Write(new string(' ', Console.BufferWidth)); //writes the space character over the entire width of the console
+            SetHorizontalCursorPos(0); //reset's the console's cursor position
+        }
+
+        /// <summary>
+        /// sets the cursor's position on the horizontal axis
+        /// </summary>
+        /// <param name="_hPosition">the position on the horizontal axis</param>
+        private void SetHorizontalCursorPos(int _hPosition)
+        {
+            int row = Console.GetCursorPosition().Top; //gets what line the cursor is currently at
+
+            Console.SetCursorPosition(_hPosition, row);
         }
     }
 }
