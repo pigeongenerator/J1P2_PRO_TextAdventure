@@ -39,7 +39,7 @@
                     if (types[x, y] == TileType.start)
                     {
                         playerPos[0] = y;
-                        playerPos[1] = x;
+                        playerPos[1] = Math.Abs(x - size) - 1;
                     }
                 }
             }
