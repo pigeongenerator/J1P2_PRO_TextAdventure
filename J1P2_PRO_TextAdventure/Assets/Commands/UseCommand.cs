@@ -19,7 +19,7 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
             Tile playerTile = world.GetPlayerTile();
             if (playerTile.Type == TileType.tree && player.HasAxe)
             {
-                playerTile.Type = TileType.grass;
+                playerTile.CastTile(TileType.grass);
                 player.Wood += 1;
 
                 Console.WriteLine($"you chopped down the tree, you now have {player.Wood} wood.");

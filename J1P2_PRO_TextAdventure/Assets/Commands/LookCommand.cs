@@ -2,7 +2,6 @@
 
 namespace J1P2_PRO_TextAdventure.Assets.Commands
 {
-
     internal class LookCommand : Command
     {
         private readonly World world;

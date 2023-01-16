@@ -4,11 +4,7 @@
     {
         private TileType type;
 
-        public TileType Type
-        {
-            get => type;
-            set => type = value;
-        }
+        public TileType Type { get => type; }
 
 
         public Tile(TileType _type)
@@ -53,6 +49,36 @@
             };
         }
 
+        /// <summary>
+        /// casts this tile's type to another
+        /// </summary>
+        /// <param name="_castTo">the type to be casted to</param>
+        public void CastTile(TileType _castTo)
+        {
+            type = _castTo;
+        }
+
+        /// <summary>
+        /// conditional <see cref="type"/> cast <br/>
+        /// casts the tile only if <see cref="type"/> matches <paramref name="_allowedCast"/>
+        /// </summary>
+        /// <param name="_castTo">the type to be casted to</param>
+        /// <param name="_allowedCast">the type that <see cref="type"/> needs to match to cast</param>
+        public void CastTile(TileType _castTo, TileType _allowedCast)
+        {
+            if (type == _allowedCast)
+            {
+                type = _castTo;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_player"></param>
+        /// <param name="_successEnterMessage"></param>
+        /// <param name="_failedEnterMessage"></param>
+        /// <returns></returns>
         private string ConditianalMessage(Player _player, string _successEnterMessage, string _failedEnterMessage)
         {
             if (CanEnter(_player))
