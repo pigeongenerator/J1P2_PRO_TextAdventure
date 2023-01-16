@@ -22,7 +22,7 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
             {
                 case TileType.axe:
                     player.HasAxe = true;
-                    currentTile.Type = TileType.grass;
+                    currentTile.CastTile(TileType.grass);
                     Console.WriteLine("You took the rusty axe.");
                     break;
 

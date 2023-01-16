@@ -89,8 +89,10 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
                 "Jesse explained the situation and the person was glad to help");
             endDialogue.Start();
 
-            finalDialogue = new("Finally when reaching Jesse's family, Jesse was very happy to see them and told them all about his adventure.");
-            finalDialogue.ContinuePrompt = "the end.";
+
+            finalDialogue = new("Finally when reaching Jesse's family, Jesse was very happy to see them and told them all about his adventure.")
+            { ContinuePrompt = "the end." };
+
             finalDialogue.Start();
         }
     }

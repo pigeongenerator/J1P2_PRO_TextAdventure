@@ -27,7 +27,7 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
             }
             else if (playerTile.Type == TileType.food)
             {
-                playerTile.Type = TileType.grass;
+                playerTile.CastTile(TileType.grass);
                 player.IsHungry = false;
                 Console.WriteLine(sucessMessage);
             }
