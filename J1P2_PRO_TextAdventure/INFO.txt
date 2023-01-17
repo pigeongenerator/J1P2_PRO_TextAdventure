@@ -4,15 +4,15 @@
 	- Geen onnodige herhaling van code!
 
 	O Beschrijvende comments bij je code.
-	O Random event/willekeurige gebeurtenis in je spel.							-> location of FOOD
-	~ Cover art gemaakt
+	V Random event/willekeurige gebeurtenis in je spel.
+	V Cover art gemaakt
 	V Er is een Potoo verwerkt in het spel.
 	V Externe bestanden gebruikt voor ASCII art.
 	V Geen goto!
 
 Technische eisen:
-	O Collection (list & array)													-> missling list
-	O Loop (foreach, for, while & do while)										-> missing do while
+	? Loop (foreach, for, while & do while)										-> missing do while
+	V Collection (list & array)
 	V Conditional statements (switch statement & if, else if, else)
 	V Method met return type
 	V Method met parameters
@@ -24,4 +24,8 @@ Technische eisen:
 		V Correcte Access Modifiers
 		V Class constructors
 
-make help applicable to the player's current situation
+- = keep in mind
+? = ask about this
+O = to do
+X = won't do
+V = done

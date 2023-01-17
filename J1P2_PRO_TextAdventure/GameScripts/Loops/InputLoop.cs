@@ -3,7 +3,7 @@
     internal class InputLoop : Loop
     {
         private string? input;
-        int originColumn, originRow;
+        private int originColumn, originRow;
 
 
         /// <summary>
