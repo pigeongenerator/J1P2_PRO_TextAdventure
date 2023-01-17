@@ -11,7 +11,7 @@
 	V Geen goto!
 
 Technische eisen:
-	? Loop (foreach, for, while & do while)										-> missing do while
+	V Loop (foreach, for, while & do while)										-> missing do while
 	V Collection (list & array)
 	V Conditional statements (switch statement & if, else if, else)
 	V Method met return type
