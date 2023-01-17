@@ -1,6 +1,5 @@
 ﻿namespace J1P2_PRO_TextAdventure
 {
-#warning find better name
     internal class ConsoleManager
     {
         /// <summary>

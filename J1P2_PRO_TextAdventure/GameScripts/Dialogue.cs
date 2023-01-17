@@ -43,7 +43,6 @@
 
         protected override void Script()
         {
-            #warning this also needs to be changed
             ConsoleManager consoleManager = new();
 
 

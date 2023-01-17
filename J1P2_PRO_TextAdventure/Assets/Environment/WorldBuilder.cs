@@ -10,7 +10,7 @@ namespace J1P2_PRO_TextAdventure.Assets.Environment
         public int[] PlayerPos { get => playerPos; }
 
 
-        public WorldBuilder(World _world)
+        public WorldBuilder()
         {
             playerPos = new int[2] { 0, 0 };
         }

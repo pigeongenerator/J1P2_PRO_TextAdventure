@@ -11,7 +11,7 @@
         public World()
         {
             int[] playerPos;
-            WorldBuilder worldBuilder = new(this);
+            WorldBuilder worldBuilder = new();
             world = worldBuilder.GenTiles();
             playerPos = worldBuilder.PlayerPos;
 

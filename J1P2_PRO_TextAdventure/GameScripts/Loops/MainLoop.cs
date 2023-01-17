@@ -25,7 +25,9 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             };
         }
 
-        // start of MainLoop
+        /// <summary>
+        /// start of MainLoop
+        /// </summary>
         protected override void OnStart()
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -33,12 +35,15 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             Console.ResetColor();
         }
 
-        // checks if the player is on the mountain
+        /// <summary>
+        /// checks if the player is on the mountain
+        /// </summary>
+        /// <returns><see langword="true"/> if the player's position is on a mountain tile. Otherwise <see langword="false"/></returns>
         protected override bool LoopCondition()
         {
-            (int posX, int posY) = world.Player.GetPosition();
+            Tile playerTile = world.GetPlayerTile();
 
-            if (world.GetTile(posX, posY).Type == TileType.mountain)
+            if (playerTile.Type == TileType.mountain)
             {
                 return false;
             }
@@ -46,7 +51,9 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             return true;
         }
 
-        //
+        /// <summary>
+        /// gets player's input & tries to run the corresponding command
+        /// </summary>
         protected override void DuringLoop()
         {
             string input;
@@ -56,12 +63,13 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             inputLoop.Start();
             input = inputLoop.GetInput();
 
-            foreach (Command command in commands)
+            foreach (Command command in commands) //loops through all commands 
             {
                 if (command.IsCommand(input))
                 {
                     command.Run();
                     commandSuccess = true;
+                    break; //breaks out of the loop
                 }
             }
 
@@ -71,7 +79,9 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             }
         }
 
-        // prints the final dialogue.
+        /// <summary>
+        /// prints the final dialogue.
+        /// </summary>
         protected override void OnEnd()
         {
             Dialogue endDialogue;
