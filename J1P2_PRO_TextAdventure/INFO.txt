@@ -32,6 +32,7 @@ V = done
 
 
 TODO:
-	-add summaries to classes & constructors
-	-make go messages appear like look messages or the other way arround
-	-look into using static for utility classes? -> ask about this
+	O make class & activity diagram
+	O add summaries to classes & constructors
+	O make go messages appear like look messages or the other way arround
+	? look into using static for utility classes?
