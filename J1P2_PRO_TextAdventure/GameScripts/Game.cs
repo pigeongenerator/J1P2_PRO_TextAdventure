@@ -7,11 +7,11 @@ namespace J1P2_PRO_TextAdventure.GameScripts
     {
         public void Start()
         {
-            World world = new();
-            MainLoop mainLoop = new(world);
+            World world = new(); //defines a new world object
+            MainLoop mainLoop = new(world); //defines a new MainLoop object with 'world' passed as an argument in the constructor
 
-            Welcome();
-            mainLoop.Start();
+            Welcome(); //calls a method
+            mainLoop.Start(); //calls a public method in an object
         }
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts
         /// </summary>
         private void Welcome()
         {
-            Dialogue dialogue;
+            Dialogue dialogue; //declares a dialogue variable
             Random random = new();
             string[] dialogueLines = {
                 "After waking up, Jesse started preparing for a trip to their family.",
