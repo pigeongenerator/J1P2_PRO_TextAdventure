@@ -5,17 +5,20 @@ namespace J1P2_PRO_TextAdventure.GameScripts
 {
     internal class Game
     {
+        /// <summary>
+        /// starts the game
+        /// </summary>
         public void Start()
         {
             World world = new(); //defines a new world object
             MainLoop mainLoop = new(world); //defines a new MainLoop object with 'world' passed as an argument in the constructor
 
-            Welcome(); //calls a method
-            mainLoop.Start(); //calls a public method in an object
+            Welcome(); //show the title and start dialogue
+            mainLoop.Start(); //starts the game
         }
 
         /// <summary>
-        /// shows the game's title.
+        /// show the title and start dialogue
         /// </summary>
         private void Welcome()
         {
@@ -38,13 +41,13 @@ namespace J1P2_PRO_TextAdventure.GameScripts
 
             if (random.Next(100) < 25) //returns true a curtain percentage of the time
             {
-                dialogueLines[3] = "A potoo flew by, it was so majestic.";
+                dialogueLines[3] = "A potoo flew by, it was so majestic."; //changes the dialogue at index 3
             }
 
-            dialogue = new Dialogue(dialogueLines);
+            dialogue = new Dialogue(dialogueLines); //assigns a new dialogue object to the variable
 
             ShowTitle();
-            Console.Clear();
+            Console.Clear(); //clears the whole console
             dialogue.Start();
         }
 
@@ -54,7 +57,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts
         private void ShowTitle()
         {
             Dialogue dialogue = new("");
-            dialogue.ContinuePrompt = "<press any key to start>";
+            dialogue.ContinuePrompt = "<press any key to start>"; //sets the continue prompt for
 
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
