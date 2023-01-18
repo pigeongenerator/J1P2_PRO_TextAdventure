@@ -23,7 +23,7 @@
             argument = null;
         }
 
-        public bool IsCommand(string _value)
+        public bool WasCalled(string _value)
         {
             if (_value.StartsWith(keyword) && arguments == null)
             {
