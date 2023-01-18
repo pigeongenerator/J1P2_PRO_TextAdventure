@@ -25,7 +25,7 @@
         public void SetIndent(int _value)
         {
             if (_value < 0) //runs the code below if _value is below 0
-            { throw new ArgumentOutOfRangeException($"{nameof(_value)}", _value, $"{nameof(_value)} cannot be below 0"); } //throws an exception
+            { throw new ArgumentOutOfRangeException($"{nameof(_value)}", _value, $"{nameof(_value)} cannot be below 0"); } //throws an exception, nameof gets the literal name of a variable, class or method
 
             indent = _value; //assigns a value to a variable
         }
@@ -39,15 +39,15 @@
         {
             dialogueLines = _dialogueLines;
             continuePrompt = "<press any key to continue>";
-            indent = 1;
+            indent = 1; //sets the default indentation what 
         }
 
         public void Start()
         {
             ConsoleManager consoleManager = new();
 
-
-            Console.CursorVisible = false; //hides the cursor in the console output
+            
+            Console.CursorVisible = false; //hides the cursor in the console
 
             foreach (string line in dialogueLines) //loops through each item in the array
             {
@@ -64,7 +64,7 @@
                 consoleManager.ClearLine(); //clears the current line in the console.
             }
 
-            Console.CursorVisible = true;
+            Console.CursorVisible = true; //shows the cursor in the console
         }
     }
 }
