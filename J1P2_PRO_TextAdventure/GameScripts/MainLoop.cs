@@ -2,9 +2,9 @@
 using J1P2_PRO_TextAdventure.Assets.Commands;
 using J1P2_PRO_TextAdventure.Assets.Environment;
 
-namespace J1P2_PRO_TextAdventure.GameScripts.Loops
+namespace J1P2_PRO_TextAdventure.GameScripts
 {
-    internal class MainLoop : Loop
+    internal class MainLoop
     {
         private readonly World world;
         private readonly Command[] commands;
@@ -28,18 +28,50 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
         /// <summary>
         /// start of MainLoop
         /// </summary>
-        protected override void OnStart()
+        public void Start()
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("hint: type \"help\" if you're stuck.");
             Console.ResetColor();
+
+            Loop();
+            OnEnd();
+        }
+
+        /// <summary>
+        /// gets player's input & tries to run the corresponding command
+        /// </summary>
+        private void Loop()
+        {
+            while (LoopCondition())
+            {
+                string input;
+                bool commandSuccess = false;
+
+                input = GetInput("What do you want to do?");
+
+                foreach (Command command in commands) //loops through all commands 
+                {
+                    if (command.IsCommand(input))
+                    {
+                        command.Run();
+                        commandSuccess = true;
+                        break; //breaks out of the loop
+                    }
+                }
+
+                if (commandSuccess == false)
+                {
+                    Console.WriteLine($"You don't know how to: \"{input}\".");
+                }
+            }
         }
 
         /// <summary>
         /// checks if the player is on the mountain
         /// </summary>
         /// <returns><see langword="true"/> if the player's position is on a mountain tile. Otherwise <see langword="false"/></returns>
-        protected override bool LoopCondition()
+        private bool LoopCondition()
         {
             Tile playerTile = world.GetPlayerTile();
 
@@ -51,38 +83,35 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             return true;
         }
 
-        /// <summary>
-        /// gets player's input & tries to run the corresponding command
-        /// </summary>
-        protected override void DuringLoop()
+        private string GetInput(string _message)
         {
-            string input;
-            bool commandSuccess = false;
-            InputLoop inputLoop = new();
+            string? input;
+            int cursorX, cursorY;
+            ConsoleManager consoleManager = new();
 
-            inputLoop.Start();
-            input = inputLoop.GetInput();
+            Console.WriteLine($"\n{_message}");
+            Console.Write(" > ");
 
-            foreach (Command command in commands) //loops through all commands 
+            cursorY = Console.GetCursorPosition().Top;
+            cursorX = Console.GetCursorPosition().Left;
+
+            do
             {
-                if (command.IsCommand(input))
-                {
-                    command.Run();
-                    commandSuccess = true;
-                    break; //breaks out of the loop
-                }
+                Console.SetCursorPosition(cursorX, cursorY);
+                input = Console.ReadLine(); //gets input from the user and stores it in a variable
             }
+            while (string.IsNullOrEmpty(input));
 
-            if (commandSuccess == false)
-            {
-                Console.WriteLine($"You don't know how to: \"{input}\".");
-            }
+            Console.SetCursorPosition(cursorX - 2, cursorY);
+            Console.WriteLine(' ');
+
+            return input;
         }
 
         /// <summary>
         /// prints the final dialogue.
         /// </summary>
-        protected override void OnEnd()
+        private void OnEnd()
         {
             Dialogue endDialogue;
             Dialogue finalDialogue;
