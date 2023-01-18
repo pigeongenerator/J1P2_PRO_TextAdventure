@@ -131,7 +131,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts
                 "Then finally, a car drove by.",
                 "Jesse tried to hitch hike and the car stopped",
                 "Jesse explained the situation and the person was glad to help");
-            endDialogue.Start();
+            endDialogue.Start(); //starts the end dialogue
 
 
             finalDialogue = new("Finally when reaching Jesse's family, Jesse was very happy to see them and told them all about his adventure.")

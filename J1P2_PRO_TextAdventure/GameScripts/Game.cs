@@ -56,8 +56,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts
         /// </summary>
         private void ShowTitle()
         {
-            Dialogue dialogue = new("");
-            dialogue.ContinuePrompt = "<press any key to start>"; //sets the continue prompt for
+            ConsoleManager consoleManager = new();
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) //checks if the current OS is windows
             {
