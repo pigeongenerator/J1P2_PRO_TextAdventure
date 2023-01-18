@@ -3,9 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace J1P2_PRO_TextAdventure.GameScripts
 {
-    internal class Game : GameScript
+    internal class Game
     {
-        protected override void Script()
+        public void Start()
         {
             World world = new();
             MainLoop mainLoop = new(world);
