@@ -1,5 +1,4 @@
 ﻿using J1P2_PRO_TextAdventure.Assets.Environment;
-using J1P2_PRO_TextAdventure.GameScripts.Loops;
 using System.Runtime.InteropServices;
 
 namespace J1P2_PRO_TextAdventure.GameScripts

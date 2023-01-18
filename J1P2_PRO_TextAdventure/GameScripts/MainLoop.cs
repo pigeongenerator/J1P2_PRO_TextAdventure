@@ -2,9 +2,9 @@
 using J1P2_PRO_TextAdventure.Assets.Commands;
 using J1P2_PRO_TextAdventure.Assets.Environment;
 
-namespace J1P2_PRO_TextAdventure.GameScripts.Loops
+namespace J1P2_PRO_TextAdventure.GameScripts
 {
-    internal class MainLoop : Loop
+    internal class MainLoop
     {
         private readonly World world;
         private readonly Command[] commands;
@@ -58,10 +58,8 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
         {
             string input;
             bool commandSuccess = false;
-            InputLoop inputLoop = new();
 
-            inputLoop.Start();
-            input = inputLoop.GetInput();
+            input = GetInput("What do you want to do?");
 
             foreach (Command command in commands) //loops through all commands 
             {
@@ -104,6 +102,31 @@ namespace J1P2_PRO_TextAdventure.GameScripts.Loops
             { ContinuePrompt = "the end." };
 
             finalDialogue.Start();
+        }
+
+        private string GetInput(string _message)
+        {
+            string? input;
+            int cursorX, cursorY;
+            ConsoleManager consoleManager = new();
+
+            Console.WriteLine($"\n{_message}");
+            Console.Write(" > ");
+
+            cursorY = Console.GetCursorPosition().Top;
+            cursorX = Console.GetCursorPosition().Left;
+
+            do
+            {
+                Console.SetCursorPosition(cursorX, cursorY);
+                input = Console.ReadLine(); //gets input from the user and stores it in a variable
+            }
+            while (string.IsNullOrEmpty(input));
+
+            Console.SetCursorPosition(cursorX - 2, cursorY);
+            Console.WriteLine(' ');
+
+            return input;
         }
     }
 }
