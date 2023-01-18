@@ -4,10 +4,12 @@ namespace J1P2_PRO_TextAdventure.Assets.Environment
 {
     internal class WorldBuilder
     {
-        private const int size = 7;
+#warning test rectangular size
+        private const int sizeX = 7;
+        private const int sizeY = 7;
         private readonly int[] playerPos;
 
-        public int[] PlayerPos { get => playerPos; }
+        public int[] StartPos { get => playerPos; }
 
 
         public WorldBuilder()
@@ -22,15 +24,15 @@ namespace J1P2_PRO_TextAdventure.Assets.Environment
             Tile[,] tiles;
             TileType[,] types;
 
-            tiles = new Tile[size, size];
+            tiles = new Tile[sizeY, sizeX];
             types = GetTileTypes();
 
-            for (int x = 0; x < size; x++) //loops through the X axis
+            for (int x = 0; x < sizeX; x++) //loops through the X axis
             {
-                for (int y = 0; y < size; y++) //loops through the Y axis
+                for (int y = 0; y < sizeX; y++) //loops through the Y axis
                 {
                     newX = y;
-                    newY = Math.Abs(x - size) - 1; //removes 'size' from X, makes the value absolute (-x -> x || x -> x)
+                    newY = Math.Abs(x - sizeX) - 1; //removes 'size' from X, makes the value absolute (-x -> x || x -> x)
 
                     tiles[newX, newY] = new Tile(types[x, y]);
 
@@ -79,11 +81,11 @@ namespace J1P2_PRO_TextAdventure.Assets.Environment
 
             for (int i = -1; i < 2; i += 2)
             {
-                if (x + i >= 0 && x + i < size)
+                if (x + i >= 0 && x + i < sizeX)
                 {
                     _tiles[x + i, y].CastTile(TileType.water, TileType.grass);
                 }
-                if (y + i >= 0 && y + i < size)
+                if (y + i >= 0 && y + i < sizeY)
                 {
                     _tiles[x, y + i].CastTile(TileType.water, TileType.grass);
                 }
@@ -92,7 +94,7 @@ namespace J1P2_PRO_TextAdventure.Assets.Environment
 
         private TileType[,] GetTileTypes()
         {
-            return new TileType[size, size]
+            return new TileType[sizeX, sizeY]
             {
                 { TileType.shrubbery, TileType.shrubbery, TileType.shrubbery, TileType.shrubbery, TileType.shrubbery, TileType.shrubbery, TileType.shrubbery },
                 { TileType.shrubbery, TileType.tree,      TileType.grass,     TileType.grass,     TileType.food,      TileType.grass,     TileType.shrubbery },
