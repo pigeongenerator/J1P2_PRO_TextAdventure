@@ -1,6 +1,6 @@
 ﻿namespace J1P2_PRO_TextAdventure.Assets.Environment
 {
-    internal enum TileType
+    internal enum TileType //defines an enumerate class type
     {
         shrubbery,
         grass,

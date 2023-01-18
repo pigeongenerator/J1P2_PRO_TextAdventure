@@ -3,7 +3,7 @@
 	- Correcte naamgeving variabelen methods & classes.
 	- Geen onnodige herhaling van code!
 
-	O Beschrijvende comments bij je code.
+	V Beschrijvende comments bij je code.
 	V Random event/willekeurige gebeurtenis in je spel.
 	V Cover art gemaakt
 	V Er is een Potoo verwerkt in het spel.
@@ -29,3 +29,10 @@ Technische eisen:
 O = to do
 X = won't do
 V = done
+
+
+TODO:
+	O make class & activity diagram
+	O add summaries to classes & constructors
+	O make go messages appear like look messages or the other way arround
+	? look into using static for utility classes?

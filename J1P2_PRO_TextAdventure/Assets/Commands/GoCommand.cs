@@ -14,12 +14,16 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
             player = _player;
         }
 
+        /// <summary>
+        /// moves the player based on cardinal directions. e.g. north, south, east, west
+        /// </summary>
+        /// <exception cref="Exception"></exception>
         public override void Run()
         {
-            switch (Argument)
+            switch (Argument) //switch statement for argument
             {
                 case "north":
-                    MovePlayer(0, 1);
+                    MovePlayer(0, 1); //moves the player relative to the player's current position
                     break;
 
                 case "east":
@@ -39,15 +43,22 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
             }
         }
 
+        /// <summary>
+        /// moves the player relative to the player
+        /// </summary>
+        /// <param name="_dx">the distance in the X direction the player should travel</param>
+        /// <param name="_dy">the distance in the Y direction the player should travel</param>
         private void MovePlayer(int _dx, int _dy)
         {
-            (int x, int y) = player.GetPosition();
-            player.Move(_dx, _dy, world);
+            (int x, int y) = player.GetPosition(); //gets the player's current position
+            player.Move(_dx, _dy, world); //moves the player
+            Tile enteredTile;
 
             x += _dx;
             y += _dy;
 
-            Console.WriteLine(world.GetTile(x, y).OnEnter(player));
+            enteredTile = world.GetTile(x, y); //gets the entered tile
+            Console.WriteLine(enteredTile.OnEnter(player)); //writes the message of the attempted entered tile
         }
     }
 }

@@ -5,21 +5,24 @@ namespace J1P2_PRO_TextAdventure.GameScripts
 {
     internal class Game
     {
+        /// <summary>
+        /// starts the game
+        /// </summary>
         public void Start()
         {
-            World world = new();
-            MainLoop mainLoop = new(world);
+            World world = new(); //defines a new world object
+            MainLoop mainLoop = new(world); //defines a new MainLoop object with 'world' passed as an argument in the constructor
 
-            Welcome();
-            mainLoop.Start();
+            Welcome(); //show the title and start dialogue
+            mainLoop.Start(); //starts the game
         }
 
         /// <summary>
-        /// shows the game's title.
+        /// show the title and start dialogue
         /// </summary>
         private void Welcome()
         {
-            Dialogue dialogue;
+            Dialogue dialogue; //declares a dialogue variable
             Random random = new();
             string[] dialogueLines = {
                 "After waking up, Jesse started preparing for a trip to their family.",
@@ -38,13 +41,13 @@ namespace J1P2_PRO_TextAdventure.GameScripts
 
             if (random.Next(100) < 25) //returns true a curtain percentage of the time
             {
-                dialogueLines[3] = "A potoo flew by, it was so majestic."; //changes value at index 3
+                dialogueLines[3] = "A potoo flew by, it was so majestic."; //changes the dialogue at index 3
             }
 
-            dialogue = new Dialogue(dialogueLines);
+            dialogue = new Dialogue(dialogueLines); //assigns a new dialogue object to the variable
 
             ShowTitle();
-            Console.Clear();
+            Console.Clear(); //clears the whole console
             dialogue.Start();
         }
 
