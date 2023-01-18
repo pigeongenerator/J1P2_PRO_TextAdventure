@@ -14,13 +14,16 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
             player = _player;
         }
 
+        /// <summary>
+        /// uses the axe
+        /// </summary>
         public override void Run()
         {
-            Tile playerTile = world.GetPlayerTile();
-            if (playerTile.Type == TileType.tree && player.HasAxe)
+            Tile playerTile = world.GetPlayerTile(); //gets the player's current tile
+            if (playerTile.Type == TileType.tree && player.HasAxe) //if the player has an axe and is at a tree
             {
-                playerTile.CastTile(TileType.grass);
-                player.Wood += 1;
+                playerTile.CastTile(TileType.grass); //turns the tree to grass
+                player.Wood += 1; //adds 1 to how much wood the player has
 
                 Console.WriteLine($"you chopped down the tree, you now have {player.Wood} wood.");
             }

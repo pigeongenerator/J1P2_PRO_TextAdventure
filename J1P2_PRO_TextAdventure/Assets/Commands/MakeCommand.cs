@@ -12,9 +12,12 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
             player = _player;
         }
 
+        /// <summary>
+        /// if <see cref="Player.Wood"/> is more or equal to 4, <see cref="Player.hasBoat"/> is set to <see langword="true"/>
+        /// </summary>
         public override void Run()
         {
-            if (player.Wood >= 4)
+            if (player.Wood >= 4) //if the player has enough wood
             {
                 player.Wood -= 4;
                 player.HasBoat = true;

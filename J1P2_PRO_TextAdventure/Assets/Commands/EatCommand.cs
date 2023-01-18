@@ -2,7 +2,7 @@
 
 namespace J1P2_PRO_TextAdventure.Assets.Commands
 {
-    internal class EatCommand : Command
+    internal class EatCommand : Command //inherits from Command class
     {
         private readonly World world;
         private readonly Player player;
@@ -14,24 +14,27 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
             player = _player;
         }
 
+        /// <summary>
+        /// checks if the player has or is standing on beans. Removes the beans and makes the player no longer hungry
+        /// </summary>
         public override void Run()
         {
-            string sucessMessage = "You ate the delicious beans, you feel recharged!";
-            Tile playerTile = world.GetPlayerTile();
+            string successMessage = "You ate the delicious beans, you feel recharged!"; //defines the success message
+            Tile playerTile = world.GetPlayerTile(); //gets the player tile
 
-            if (player.HasFood)
+            if (player.HasFood) //if player has food
             {
                 player.HasFood = false;
                 player.IsHungry = false;
-                Console.WriteLine(sucessMessage);
+                Console.WriteLine(successMessage);
             }
-            else if (playerTile.Type == TileType.food)
+            else if (playerTile.Type == TileType.food) //if player is on food tile
             {
                 playerTile.CastTile(TileType.grass);
                 player.IsHungry = false;
-                Console.WriteLine(sucessMessage);
+                Console.WriteLine(successMessage);
             }
-            else
+            else //otherwise
             {
                 Console.WriteLine("You see nothing for you to eat.");
             }

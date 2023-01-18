@@ -29,3 +29,9 @@ Technische eisen:
 O = to do
 X = won't do
 V = done
+
+
+TODO:
+	-add summaries to classes & constructors
+	-make go messages appear like look messages or the other way arround
+	-look into using static for utility classes? -> ask about this
