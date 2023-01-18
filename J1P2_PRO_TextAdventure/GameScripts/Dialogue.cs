@@ -56,11 +56,11 @@
 
                 consoleManager.FlipColors(); //flip's the console's colors
                 consoleManager.WriteAtColumn(indent, continuePrompt); //writes to console
+                Console.ResetColor(); //resets the console's color
 
 
                 Console.ReadKey(true); //halts the thread until the user gives input, this input is intercepted to be empty
 
-                Console.ResetColor(); //resets the console's color
                 consoleManager.ClearLine(); //clears the current line in the console.
             }
 

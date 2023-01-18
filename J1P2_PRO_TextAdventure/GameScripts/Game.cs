@@ -59,20 +59,27 @@ namespace J1P2_PRO_TextAdventure.GameScripts
             Dialogue dialogue = new("");
             dialogue.ContinuePrompt = "<press any key to start>"; //sets the continue prompt for
 
-            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) //checks if the current OS is windows
             {
-                throw new PlatformNotSupportedException($"the platform {RuntimeInformation.OSDescription} is not supported, sorry!");
+
+                Console.Clear(); //clears the console
+                Console.Title = "Jesse and the terrible crash of the recreational vehicle: " + // + concatenates the string
+                    "the survival outside civilization underneath the great crystal blue sky"; //sets the console window title
+                Console.SetBufferSize(135, Console.WindowHeight); //sets the console's buffer size to fit the title
+                Console.SetWindowSize(135, Console.WindowHeight); //sets the console's window size so it matches the new buffer size
+
+                WriteFromFile("./Assets/ASCII/title.txt"); //generated from https://patorjk.com/software/taag/
+            }
+            else
+            {
+                Console.WriteLine("Jesse and the terrible crash of the recreational vehicle: " +
+                    "the survival outside civilization underneath the great crystal blue sky");
             }
 
-            Console.Clear();
-            Console.Title = "Jesse and the terrible crash of the recreational vehicle" +
-                ": the survival outside civilization underneath the great crystal blue sky";
-            Console.SetBufferSize(135, Console.WindowHeight);
-            Console.SetWindowSize(135, Console.WindowHeight);
-
-            WriteFromFile("./Assets/ASCII/title.txt");
-
-            dialogue.Start();
+            consoleManager.FlipColors(); //flips the consoles colors
+            Console.WriteLine("<press any key to start>");
+            Console.ResetColor(); //resets the consoles colors
+            Console.ReadKey(true); //pauses the script until input is given, 'true' sets if the input is intercepted so it isn't written to the console
         }
 
         /// <summary>
@@ -81,15 +88,15 @@ namespace J1P2_PRO_TextAdventure.GameScripts
         /// <param name="_filePath">specifies the path that should be written from</param>
         private void WriteFromFile(string _filePath)
         {
-            string[] titleLines = File.ReadAllLines(_filePath);
-            string title = string.Empty;
+            string[] lines = File.ReadAllLines(_filePath); //Reads all lines from the file path as an array
+            string value = string.Empty; //assigns an empty string variable to title
 
-            foreach (string line in titleLines)
+            foreach (string line in lines) //loops through each line in the array
             {
-                title += line + '\n';
+                value += line + '\n'; //adds the value to the string
             }
 
-            Console.WriteLine(title);
+            Console.WriteLine(value); //writes all lines
         }
     }
 }
