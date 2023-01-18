@@ -29,9 +29,10 @@
         /// <param name="_value">the value to be written</param>
         public void WriteAtColumn(int _column, string _value)
         {
-            int line = Console.GetCursorPosition().Top;
-            Console.SetCursorPosition(_column, line);
-            Console.Write(_value);
+            int line = Console.GetCursorPosition().Top; //gets what row the cursor is on
+
+            Console.SetCursorPosition(_column, line); //set's the cursor position in the console
+            Console.Write(_value); //Writes to console without newline
         }
     }
 }
