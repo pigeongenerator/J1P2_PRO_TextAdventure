@@ -14,9 +14,10 @@
         /// </summary>
         public string ContinuePrompt //defines a property
         {
-            get { return continuePrompt; } //is called upon getting a value from the property
-            set { continuePrompt = value; } //is called upon assigning a value to the property
+            get => continuePrompt; //is called upon getting a value from the property
+            set => continuePrompt = value; //is called upon assigning a value to the property
         }
+
 
         /// <summary>
         /// sets the amount of spaces the dialogue should be from the edge
