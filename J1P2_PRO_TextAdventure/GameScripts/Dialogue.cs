@@ -3,7 +3,7 @@
     /// <summary>
     /// used for creating & going through dialogue chains
     /// </summary>
-    internal class Dialogue : GameScript //inherits from GameScript
+    internal class Dialogue
     {
         private readonly string[] dialogueLines; //declares a readonly variable which can only be assigned in the constructor
         private string continuePrompt; //declares a private string variable which means it can only be accessed in this class
@@ -41,7 +41,7 @@
             indent = 1;
         }
 
-        protected override void Script()
+        public void Start()
         {
             ConsoleManager consoleManager = new();
 
