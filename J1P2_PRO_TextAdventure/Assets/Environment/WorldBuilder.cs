@@ -3,6 +3,9 @@ using System.Net.Http.Headers;
 
 namespace J1P2_PRO_TextAdventure.Assets.Environment
 {
+    /// <summary>
+    /// assembles the world
+    /// </summary>
     internal class WorldBuilder
     {
         private const int size = 7; //defines a constant variable
@@ -34,7 +37,7 @@ namespace J1P2_PRO_TextAdventure.Assets.Environment
             {
                 for (int y = 0; y < size; y++) //loops through the Y axis
                 {
-                    //converting x & y to flip x and y and flip y, calculates the new positions
+                    //converting x & y to flip x and y and flip y, see the transformations visualized here: https://www.desmos.com/calculator/gtxkiqxosx
                     newX = y;
                     newY = Math.Abs(x - size) - 1; //removes 'size' from X, makes the value absolute (-x -> x || x -> x)
 
