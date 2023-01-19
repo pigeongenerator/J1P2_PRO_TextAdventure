@@ -75,10 +75,12 @@ namespace J1P2_PRO_TextAdventure.GameScripts
                     "the survival outside civilization underneath the great crystal blue sky");
             }
 
+            Console.CursorVisible = false;
             consoleManager.FlipColors(); //flips the consoles colors
             Console.WriteLine("<press any key to start>");
             Console.ResetColor(); //resets the consoles colors
             Console.ReadKey(true); //pauses the script until input is given, 'true' sets if the input is intercepted so it isn't written to the console
+            Console.CursorVisible = true;
         }
 
         /// <summary>
