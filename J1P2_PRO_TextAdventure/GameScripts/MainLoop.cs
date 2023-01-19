@@ -15,7 +15,6 @@ namespace J1P2_PRO_TextAdventure.GameScripts
             world = _world; //assigns the value from the parameter _world to world
             commands = new Command[] //defines an array, holds all active commands in the game
             {
-#warning change the constructor to the abstract command class
                 new GoCommand(world, world.Player),
                 new TakeCommand(world, world.Player),
                 new EatCommand(world, world.Player),

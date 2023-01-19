@@ -1,6 +1,6 @@
 ﻿namespace J1P2_PRO_TextAdventure
 {
-    //utility classes can use static, look into this.
+    //utility classes can use static? look into this.
     internal class ConsoleManager
     {
         /// <summary>

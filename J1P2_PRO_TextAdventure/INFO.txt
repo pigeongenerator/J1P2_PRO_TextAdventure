@@ -11,7 +11,7 @@
 	V Geen goto!
 
 Technische eisen:
-	V Loop (foreach, for, while & do while)										-> missing do while
+	V Loop (foreach, for, while & do while)
 	V Collection (list & array)
 	V Conditional statements (switch statement & if, else if, else)
 	V Method met return type
@@ -31,8 +31,10 @@ X = won't do
 V = done
 
 
-TODO:
+TODO: (sorted by priority, only skip one item, if skipped you may skip again if you finished the inital skip)
 	O make class & activity diagram
-	O add summaries to classes & constructors
+	O update walkthrough
 	O make go messages appear like look messages or the other way arround
+	O add summaries to classes & constructors
 	? look into using static for utility classes?
+	X Make World & Player in the command constructor in the command class
