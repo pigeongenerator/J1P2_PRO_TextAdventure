@@ -61,7 +61,7 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
                 TileType.food => "a patch of grass with something hidden inside.",
                 TileType.mountain => "the mountain.",
                 TileType.start => "where you landed.",
-                _ => throw new NotImplementedException()
+                _ => throw new NotImplementedException($"unknown tile type {nameof(_tile.Type)}")
             };
         }
     }

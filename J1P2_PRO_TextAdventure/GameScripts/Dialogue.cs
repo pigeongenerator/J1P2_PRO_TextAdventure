@@ -1,7 +1,7 @@
 ﻿namespace J1P2_PRO_TextAdventure.GameScripts
 {
     /// <summary>
-    /// used for creating & going through dialogue chains
+    /// used for creating and going through dialogue chains
     /// </summary>
     internal class Dialogue
     {
