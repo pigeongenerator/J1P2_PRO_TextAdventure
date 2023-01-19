@@ -58,7 +58,40 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
             y += _dy;
 
             enteredTile = world.GetTile(x, y); //gets the entered tile
-            Console.WriteLine(enteredTile.OnEnter(player)); //writes the message of the attempted entered tile
+            Console.WriteLine(GetMessage(enteredTile));
+        }
+
+        private string GetMessage(Tile _tile)
+        {
+            return _tile.Type switch
+            {
+                TileType.shrubbery => "You were unable to get through the shrubberies.",
+                TileType.grass => "You see nothing of interest here.",
+                TileType.axe => "You see a rusty axe hidden in the grass!",
+                TileType.food => "You see a can of beans hidden in the grass!",
+                TileType.start => "This is where you landed after your fall. Kind of.. eerie.",
+                TileType.tree => "There is a small tree here.",
+                TileType.water => ConditionalMessage(_tile, "You used the boat to get on the water.", "There is a lake here, you see something glistering in the distance. However, the water\n is too deep to swim safely when you are this exhausted."), //a curtain string is returned based on if the player can enter the tile
+                TileType.mountain => ConditionalMessage(_tile, "You climbed up the mountain.", "This is the mountain you fell off, you are too hungry to climb. You see your RV up there, it's burnt to a crisp."),
+                _ => throw new NotImplementedException($"unknown tile type {nameof(_tile.Type)}") //default case, if an unknown type
+            };
+        }
+
+        /// <summary>
+        /// returns a message based on if the player is allowed to enter this tile
+        /// </summary>
+        /// <param name="_tile">the tile to check if the player is allowed to enter</param>
+        /// <param name="_successMsg">the message that is returned if the player is allowed to enter the tile</param>
+        /// <param name="_failMsg">the message that is returned if the player is not allowed to enter the tile</param>
+        /// <returns>if the player is allowed to enter the tile, <paramref name="_successMsg"/> is returned, otherwise <paramref name="_failMsg"/></returns>
+        private string ConditionalMessage(Tile _tile, string _successMsg, string _failMsg)
+        {
+            if (_tile.CanEnter(player)) //checks if the player can enter the tile
+            {
+                return _successMsg; //returns the success message
+            }
+
+            return _failMsg; //returns the failed message
         }
     }
 }
