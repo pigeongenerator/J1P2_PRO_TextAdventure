@@ -39,7 +39,7 @@ namespace J1P2_PRO_TextAdventure.GameScripts
         }
 
         /// <summary>
-        /// gets player's input & tries to run the corresponding command
+        /// gets player's input and tries to run the corresponding command
         /// </summary>
         private void Loop()
         {

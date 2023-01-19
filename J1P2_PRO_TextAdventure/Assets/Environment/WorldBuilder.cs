@@ -58,7 +58,7 @@ namespace J1P2_PRO_TextAdventure.Assets.Environment
         }
 
         /// <summary>
-        /// selects a random food location, sets the remaining food tiles to grass & replaces the surrounding grass with water
+        /// selects a random food location, sets the remaining food tiles to grass and replaces the surrounding grass with water
         /// </summary>
         /// <param name="_foodLocations">the locations of the food</param>
         /// <param name="_tiles">the 2D tile array</param>

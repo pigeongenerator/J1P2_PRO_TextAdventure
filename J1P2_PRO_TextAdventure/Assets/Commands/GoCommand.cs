@@ -61,6 +61,12 @@ namespace J1P2_PRO_TextAdventure.Assets.Commands
             Console.WriteLine(GetMessage(enteredTile));
         }
 
+        /// <summary>
+        /// gets the message that should be written depending on <see cref="Tile.Type"/> and <see cref="Tile.CanEnter(Player)"/>
+        /// </summary>
+        /// <param name="_tile"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         private string GetMessage(Tile _tile)
         {
             return _tile.Type switch

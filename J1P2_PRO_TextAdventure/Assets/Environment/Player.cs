@@ -38,7 +38,7 @@
 
 
         /// <summary>
-        /// used to get the position & items of the player
+        /// used to get the position and items of the player
         /// </summary>
         /// <param name="_x">the x position of the player</param>
         /// <param name="_y">the y position of the player</param>
